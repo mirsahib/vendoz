@@ -3,7 +3,7 @@ import React from "react";
 
 function Header() {
 	return (
-		<div className="py-6 mb-6">
+		<div className="py-6">
 			<nav className="flex justify-between items-center w-[90%] max-w-screen-lg  mx-auto">
 				<div className="flex flex-row gap-8 items-center  ">
 					<Link href="/">
