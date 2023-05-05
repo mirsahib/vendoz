@@ -18,7 +18,7 @@ export default function Hero() {
 					
 				/>
 			</div>
-			<div className="flex flex-col top-[15%] lg:left-[12%] sm:left-[5%] relative ">
+			<div className="flex flex-col top-[15%] lg:left-[12%] sm:left-[5%] absolute">
 				<h1 className="text-blue-600 text-3xl font-mono font-bold">Vendoz</h1>
 				<p className=" text-gray-100 font-semibold text-lg mb-6">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
