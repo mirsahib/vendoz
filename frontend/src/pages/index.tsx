@@ -94,18 +94,116 @@ export default function Home() {
 					{/* row 2 */}
 				</section>
 				{/* catagory section */}
-				<section className="flex item-center w-[90%] m-auto bg-red-400">
-					product
+				<section className="flex flex-col item-center justify-center w-[90%] m-auto bg-red-400 my-8">
+					<div className="flex flex-col items-center justify-center bg-yellow-400">
+						<h1>Best Seller</h1>
+						<p>Top products</p>
+					</div>
+					<ul className="flex flex-wrap">
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">1</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">2</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">3</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">4</div>
+						</li>
+					</ul>
 				</section>{" "}
 				{/* product section */}
-				<section>feature</section> {/* feature section */}
-				<section className="flex item-center w-[90%] m-auto bg-red-500">
-					trending
+				<section className="flex flex-col item-center justify-center w-[90%] m-auto bg-red-400 my-8">
+					<div className="flex flex-col items-center justify-center bg-yellow-400">
+						<h1>Featured</h1>
+						<p>Top products</p>
+					</div>
+					<ul className="flex flex-wrap">
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">1</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">2</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">3</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">4</div>
+						</li>
+					</ul>
+				</section>
+				{/* featured section */}
+				<section className="flex flex-col item-center justify-center w-[90%] m-auto bg-red-400 my-8">
+					<div className="flex flex-col items-center justify-center bg-yellow-400">
+						<h1>Trending Seller</h1>
+						<p>Top products</p>
+					</div>
+					<ul className="flex flex-wrap">
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">1</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">2</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">3</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">4</div>
+						</li>
+						<li className="flex flex-col basis-1/4">
+							<div className="bg-green-400 m-1 h-[400px] ">4</div>
+						</li>
+					</ul>
+				</section>
+				{/* trending */}
+				<section className="flex bg-blue-500 my-8">
+					<div className="flex justify-between w-[90%] m-auto">
+						<div>
+							<h3>Be touch with us</h3>
+						</div>
+						<div>Search</div>
+						<div>Social</div>
+					</div>
 				</section>{" "}
 				{/* trending section */}
-				<section>contact</section> {/* trending section */}
-				<section className="flex item-center w-[90%] m-auto bg-green-400">
-					links
+				<section className="flex item-center w-[90%] m-auto">
+					<div className="flex flex-wrap w-full justify-between">
+						<div className="flex flex-col basis-1/4 bg-blue-400">
+							<h3 className=" font-semibold">catagories</h3>
+							<ul>
+								<li>Men</li>
+								<li>Women</li>
+								<li>Shoes</li>
+								<li>Accessories</li>
+							</ul>
+						</div>
+						<div className="flex flex-col basis-1/4 bg-blue-400">
+							<h3 className="font-semibold">Buy with us</h3>
+							<ul>
+								<li>About</li>
+								<li>Services</li>
+								<li>Privacy Policy</li>
+								<li>Terms and condition</li>
+							</ul>
+						</div>
+						<div className="flex flex-col basis-1/4 bg-blue-400">
+							<h3 className="font-semibold">About</h3>
+							<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias laborum, quas vitae iure similique atque rem veritatis aliquid, ipsum dignissimos error recusandae cum distinctio velit quos unde modi? Eligendi, cum.</p>
+						</div>
+						<div className="flex flex-col basis-1/4 bg-blue-400">
+							<h3 className="font-semibold">Contact Us</h3>
+							<ul>
+								<li>Men</li>
+								<li>Women</li>
+								<li>Shoes</li>
+								<li>Accessories</li>
+							</ul>
+						</div>
+					</div>
 				</section>{" "}
 				{/* trending section */}
 			</main>
