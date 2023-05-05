@@ -1,0 +1,52 @@
+import { IProduct } from "@/types"
+
+export const product:IProduct[] = [
+    {
+        id:'1',
+        name:'t-shirt',
+        desc:'lorem ipsum dolor sit amet',
+        price:10,
+        img:'/t-shirt.jpg',
+        img2:'/t-shirt.jpg',
+        isNew:false,
+        type:'normal',
+    },
+    {
+        id:'2',
+        name:'t-shirt',
+        desc:'lorem ipsum dolor sit amet',
+        price:10,
+        img:'/t-shirt.jpg',
+        img2:'/t-shirt.jpg',
+        isNew:false,
+        type:'normal',
+    },{
+        id:'3',
+        name:'t-shirt',
+        desc:'lorem ipsum dolor sit amet',
+        price:10,
+        img:'/t-shirt.jpg',
+        img2:'/t-shirt.jpg',
+        isNew:false,
+        type:'normal',
+    },{
+        id:'4',
+        name:'t-shirt',
+        desc:'lorem ipsum dolor sit amet',
+        price:10,
+        img:'/t-shirt.jpg',
+        img2:'/t-shirt.jpg',
+        isNew:false,
+        type:'normal',
+    },
+    {
+        id:'5',
+        name:'t-shirt',
+        desc:'lorem ipsum dolor sit amet',
+        price:10,
+        img:'/t-shirt.jpg',
+        img2:'/t-shirt.jpg',
+        isNew:false,
+        type:'normal',
+    },
+]
