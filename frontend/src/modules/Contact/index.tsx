@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Contact() {
 	return (
-		<section className="flex bg-blue-600 my-8 py-2">
+		<section className="flex bg-blue-600 mt-8 py-2">
 			<div className="flex justify-between w-[90%] m-auto">
 				<div className="flex items-center basis-1/4 text-white">
 					<h3 className=" font-medium">BE TOUCH WITH US</h3>
