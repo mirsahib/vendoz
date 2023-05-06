@@ -7,4 +7,5 @@ export interface IProduct{
     img2:string;
     isNew:boolean;
     type:'normal'|'featured'|'trending'
+    catagory:string
 }
