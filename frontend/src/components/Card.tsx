@@ -23,12 +23,7 @@ export default function Card({
 			</div>
 			<div className="px-5">
 				<div className="flex flex-col my-2">
-					<Link href={""}>
-						<h4 className="text-gray-800 text-lg  mb-2">
-							{name}
-						</h4>
-					</Link>
-
+					<h4 className="text-gray-800 text-lg  mb-2">{name}</h4>
 					<div className="flex ">
 						<h3 className="p-1 font-bold text-xs bg-blue-900 text-white">
 							{type}
