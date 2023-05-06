@@ -3,7 +3,7 @@ import { IProduct } from "@/types"
 export const product:IProduct[] = [
     {
         id:'1',
-        name:'t-shirt',
+        name:"LOCALÉ Men's Premium quality Solid T-shirt - Biege/Camel",
         desc:'lorem ipsum dolor sit amet',
         price:10,
         img:'/t-shirt.jpg',
@@ -19,7 +19,7 @@ export const product:IProduct[] = [
         img:'/t-shirt.jpg',
         img2:'/t-shirt.jpg',
         isNew:false,
-        type:'normal',
+        type:'featured',
     },{
         id:'3',
         name:'t-shirt',
@@ -28,7 +28,7 @@ export const product:IProduct[] = [
         img:'/t-shirt.jpg',
         img2:'/t-shirt.jpg',
         isNew:false,
-        type:'normal',
+        type:'trending',
     },{
         id:'4',
         name:'t-shirt',
