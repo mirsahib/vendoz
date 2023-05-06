@@ -1,5 +1,4 @@
 import { product } from "@/mock/data";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Card from "@/components/Card";
@@ -15,7 +14,7 @@ export default function Product() {
 				{product.map((item) => {
 					return (
 						<li key={item.id} className="flex flex-col basis-1/4">
-							<Link href={"/"}>
+							<Link href={`catagory/${item.catagory}/product/${item.id}`}>
 								<Card {...item}/>
 							</Link>
 						</li>
