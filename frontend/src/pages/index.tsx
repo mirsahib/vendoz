@@ -4,8 +4,7 @@ import Catagory from "@/modules/Catagory";
 import Product from "@/modules/Product";
 import Featured from "@/modules/Featured";
 import Trending from "@/modules/Trending";
-import Contact from "@/modules/Contact";
-import Links from "@/modules/Links";
+
 
 export default function Home() {
 	return (
@@ -19,15 +18,13 @@ export default function Home() {
 				<Catagory/>
 				{/* catagory section */}
 				<Product/>
+				<Product/>
+				<Product/>
 				{/* product section */}
-				<Featured/>
+				{/* <Featured/> */}
 				{/* featured section */}
-				<Trending/>
+				{/* <Trending/> */}
 				{/* trending */}
-				<Contact/>
-				{/* contact section */}
-				<Links/>
-				{/* trending section */}
 			</main>
 		</>
 	);

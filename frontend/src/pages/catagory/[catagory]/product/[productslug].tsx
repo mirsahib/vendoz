@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import React from "react";
 import { product } from "@/mock/data";
 
-
 const data = product[0];
 
 export default function SingleProduct() {
@@ -44,19 +43,36 @@ export default function SingleProduct() {
 						</div>
 						{/* image container */}
 						<div className="flex flex-col justify-center ">
-							<h3 className="font-semibold text-gray-800 text-2xl w-[85%]">{data.name}</h3>
-							<h3 className="my-5 text-lg font-semibold text-gray-800">$ {data.price}</h3>
+							<h3 className="font-semibold text-gray-800 text-2xl w-[85%]">
+								{data.name}
+							</h3>
+							<h3 className="my-5 text-lg font-semibold text-gray-800">
+								$ {data.price}
+							</h3>
 							<div className="flex justify-around">
-								<div>1</div>
-								<div>
-									<button className="bg-blue-700 text-white p-3 rounded">ADD TO CART</button>
+								<div className="flex items-center justify-around basis-1/2">
+									<div>
+										<button className="bg-slate-200 p-5 rounded">
+											<i className="fas fa-minus"></i>
+										</button>
+									</div>
+									<div>1</div>
+									<div>
+										<button className="bg-slate-200 p-5 rounded">
+											<i className="fas fa-plus"></i>
+										</button>
+									</div>
+								</div>
+								<div className="flex basis-1/2 ">
+									<button className="bg-blue-700 text-white p-3 rounded">
+										ADD TO CART
+									</button>
 								</div>
 							</div>
 						</div>
 						{/* product details */}
 					</div>
 				</section>
-        
 			</main>
 		</>
 	);

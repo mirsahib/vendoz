@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Link() {
+export default function Links() {
 	return (
 		<section className="flex py-8 bg-slate-100">
 			<div className="flex item-center w-[90%] m-auto">
