@@ -49,15 +49,15 @@ export default function SingleProduct() {
 							<h3 className="my-5 text-lg font-semibold text-gray-800">
 								$ {data.price}
 							</h3>
-							<div className="flex justify-around">
-								<div className="flex items-center justify-around basis-1/2">
-									<div>
+							<div className="flex justify-around mb-5">
+								<div className="flex items-center basis-1/2">
+									<div className="mr-10">
 										<button className="bg-slate-200 p-5 rounded">
 											<i className="fas fa-minus"></i>
 										</button>
 									</div>
 									<div>1</div>
-									<div>
+									<div className="ml-10">
 										<button className="bg-slate-200 p-5 rounded">
 											<i className="fas fa-plus"></i>
 										</button>
@@ -69,6 +69,9 @@ export default function SingleProduct() {
 									</button>
 								</div>
 							</div>
+              <div className="flex text-white">
+                <button className="bg-blue-700 hover:bg-blue-500 p-5 w-[90%] rounded font-semibold">BUY NOW</button>
+              </div>
 						</div>
 						{/* product details */}
 					</div>
