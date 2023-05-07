@@ -69,11 +69,26 @@ export default function SingleProduct() {
 									</button>
 								</div>
 							</div>
-              <div className="flex text-white">
-                <button className="bg-blue-700 hover:bg-blue-500 p-5 w-[90%] rounded font-semibold">BUY NOW</button>
-              </div>
+							<div className="flex text-white">
+								<button className="bg-blue-700 hover:bg-blue-500 p-5 w-[90%] rounded font-semibold">
+									BUY NOW
+								</button>
+							</div>
 						</div>
 						{/* product details */}
+					</div>
+				</section>
+				<div className=" bg-slate-100 h-5"></div>
+				<section className="w-[80%] m-auto py-5">
+					<div className="my-5">
+						<h3 className="font-semibold">Product Description</h3>
+					</div>
+					<div className="mx-5">
+						<ul className="text-slate-600 list-disc">
+							<li>Minim eu in enim aliqua ipsum proident tempor consectetur incididunt.</li>
+							<li>Id nisi adipisicing reprehenderit incididunt elit anim. Excepteur proident duis duis consequat Lorem dolor cupidatat id incididunt amet exercitation amet ea exercitation. Ipsum consequat excepteur id aliquip dolor. Laborum officia ullamco ullamco pariatur aliquip aliqua anim cillum adipisicing cillum irure laborum excepteur est. Culpa ut enim sit deserunt do nostrud eu magna sint voluptate esse occaecat duis et. Velit ad veniam voluptate enim exercitation duis duis nisi officia excepteur aute. Ex consectetur eu sit aute mollit voluptate.</li>
+							<li>Dolore reprehenderit do eiusmod elit exercitation Lorem ullamco nostrud incididunt ullamco nisi aliquip aliqua. Cillum mollit ex amet mollit officia magna dolor Lorem ad ex commodo nisi. Voluptate quis anim non id. Laboris consequat nostrud laborum in Lorem fugiat irure ea ea. Et elit do occaecat excepteur culpa.</li>
+						</ul>
 					</div>
 				</section>
 			</main>
