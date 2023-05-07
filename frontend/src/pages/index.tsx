@@ -1,9 +1,7 @@
 import Head from "next/head";
-import Hero from "@/modules/Hero";
-import Catagory from "@/modules/Catagory";
-import Product from "@/modules/Product";
-import Featured from "@/modules/Featured";
-import Trending from "@/modules/Trending";
+import Hero from "@/components/Hero";
+import Catagory from "@/components/Catagory";
+import Product from "@/components/Product";
 
 
 export default function Home() {

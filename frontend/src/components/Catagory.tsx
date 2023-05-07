@@ -1,6 +1,5 @@
-import Image from "next/image";
 import React from "react";
-import ImageContainer from "./components/ImageContainer";
+import ImageContainer from "./ImageContainer";
 
 export default function Catagory() {
 	return (
