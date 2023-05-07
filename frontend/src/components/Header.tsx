@@ -5,22 +5,17 @@ function Header() {
 	return (
 		<div className="py-6">
 			<nav className="flex justify-between items-center w-[90%] max-w-screen-lg  mx-auto">
-				<div className="flex flex-row gap-8 items-center  ">
+				<div className="flex basis-1/4 flex-row gap-8 items-center ">
 					<Link href="/">
-						<h1 className="text-xl font-semibold text-blue-600">
+						<h1 className="text-xl font-semibold text-blue-700">
 							Vendoz
 						</h1>
 					</Link>
 				</div>
-				<ul className="flex gap-8">
-					<li>
-						<button >
-							<i
-								className="fa fa-search text-gray-600 "
-								aria-hidden="true"
-							></i>
-						</button>
-					</li>
+				<div className="flex basis-1/2 ">
+					<input type="text" className="w-full h-10 border-2 rounded focus:outline-blue-600 p-3" placeholder="Search..."/>
+				</div>
+				<ul className="flex justify-end basis-1/4 gap-8">
 					<li className="relative">
 						<button>
 							<i
