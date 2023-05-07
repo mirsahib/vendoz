@@ -21,13 +21,14 @@ function Header() {
 							></i>
 						</button>
 					</li>
-					<li>
+					<li className="relative">
 						<button>
 							<i
 								className="fa fa-shopping-basket text-gray-600"
 								aria-hidden="true"
 							></i>
 						</button>
+						<span className=" flex absolute -top-2 left-3  bg-blue-700 text-xs w-4 h-4  rounded-full text-white items-center justify-center">0</span>
 					</li>
 					<li>
 						<button>
