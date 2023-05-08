@@ -2,9 +2,13 @@ import Head from "next/head";
 import Hero from "@/components/Hero";
 import Catagory from "@/components/Catagory";
 import Product from "@/components/Product";
+import { getStaticProps } from "@/lib/Product/ReadAll";
+import { InferGetStaticPropsType } from "next";
 
-
-export default function Home() {
+export default function Home({products}:InferGetStaticPropsType<typeof getStaticProps>) {
+	
+	console.log('products', products);
+	
 	return (
 		<>
 			<Head>
@@ -27,3 +31,4 @@ export default function Home() {
 		</>
 	);
 }
+export {getStaticProps} from '@/lib/Product/ReadAll'
