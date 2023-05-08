@@ -6,9 +6,7 @@ import { getStaticProps } from "@/lib/Product/ReadAll";
 import { InferGetStaticPropsType } from "next";
 
 export default function Home({products}:InferGetStaticPropsType<typeof getStaticProps>) {
-	
-	console.log('products', products);
-	
+
 	return (
 		<>
 			<Head>
@@ -19,9 +17,9 @@ export default function Home({products}:InferGetStaticPropsType<typeof getStatic
 				{/* hero section */}
 				<Catagory/>
 				{/* catagory section */}
-				<Product/>
-				<Product/>
-				<Product/>
+				<Product products={products?.data} />
+				{/* <Product/>
+				<Product/> */}
 				{/* product section */}
 				{/* <Featured/> */}
 				{/* featured section */}

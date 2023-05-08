@@ -1,5 +1,17 @@
 import {IProduct} from '@/lib/types'
 
+interface ApiResponse {
+    data:IProduct[];
+    meta:{
+        pagination:{
+            page:number,
+            pageSize:number
+            pageCount:number
+            total:number
+        }
+    }
+}
+
 const getStaticProps = async () => {
 	try {
 		const res = await fetch(
@@ -10,7 +22,8 @@ const getStaticProps = async () => {
 				},
 			}
 		);
-		const products = await res.json() as IProduct;
+		const products = await res.json() as ApiResponse;
+        
 		return {
 			props: {
 				products,
