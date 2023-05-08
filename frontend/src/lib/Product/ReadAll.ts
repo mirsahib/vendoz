@@ -1,4 +1,4 @@
-
+import {IProduct} from '@/lib/types'
 
 const getStaticProps = async () => {
 	try {
@@ -10,7 +10,7 @@ const getStaticProps = async () => {
 				},
 			}
 		);
-		const products= await res.json();
+		const products = await res.json() as IProduct;
 		return {
 			props: {
 				products,
