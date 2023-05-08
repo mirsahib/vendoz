@@ -7,9 +7,12 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "types":"t4s --out ../frontend/src/lib/types"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@oak-digital/types-4-strapi-2": "^0.5.5"
+  },
   "dependencies": {
     "@strapi/plugin-i18n": "4.10.2",
     "@strapi/plugin-users-permissions": "4.10.2",
