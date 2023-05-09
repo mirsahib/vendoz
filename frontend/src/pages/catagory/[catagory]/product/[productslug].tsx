@@ -4,13 +4,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { product } from "@/mock/data";
+import { InferGetStaticPropsType } from "next";
+import { getStaticPaths,getStaticProps, } from "@/lib/Product/ReadById";
 
 const data = product[0];
 
 export default function SingleProduct() {
 	const router = useRouter();
-	const { catagory, productslug } = router.query;
-	console.log(productslug);
+	// const { catagory, productslug } = router.query;
+	// console.log(product);
 	return (
 		<>
 			<Head>
@@ -95,3 +97,5 @@ export default function SingleProduct() {
 		</>
 	);
 }
+
+// export { getStaticPaths,getStaticProps, } from "@/lib/Product/ReadById";

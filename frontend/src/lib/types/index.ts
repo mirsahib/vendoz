@@ -6,3 +6,4 @@ export * from "./builtins/ExtractFlat";
 export * from "./Catagory";
 export * from "./Product";
 export * from "./SubCatagory";
+export * from "./Local";

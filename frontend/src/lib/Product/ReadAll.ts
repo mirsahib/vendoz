@@ -1,16 +1,4 @@
-import {IProduct} from '@/lib/types'
-
-interface ApiResponse {
-    data:IProduct[];
-    meta:{
-        pagination:{
-            page:number,
-            pageSize:number
-            pageCount:number
-            total:number
-        }
-    }
-}
+import {ApiResponse} from '@/lib/types'
 
 const getStaticProps = async () => {
 	try {
