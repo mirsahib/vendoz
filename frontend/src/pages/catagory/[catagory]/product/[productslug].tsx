@@ -6,17 +6,17 @@ import React from "react";
 import { product } from "@/mock/data";
 import { InferGetStaticPropsType } from "next";
 import { getStaticPaths,getStaticProps, } from "@/lib/Product/ReadById";
+import { urlBuilder } from "@/util/UrlBuilder";
 
 const data = product[0];
 
-export default function SingleProduct() {
-	const router = useRouter();
-	// const { catagory, productslug } = router.query;
-	// console.log(product);
+export default function SingleProduct(product:InferGetStaticPropsType<typeof getStaticProps>) {
+	const {title,desc,price,img,img2} = product.data?.attributes
+	
 	return (
 		<>
 			<Head>
-				<title>Product Name</title>
+				<title>Vendoz Online Shop</title>
 			</Head>
 			<main>
 				<div className="bg-slate-100 py-1">
@@ -35,21 +35,21 @@ export default function SingleProduct() {
 				{/* nav section */}
 				<section className="w-[80%] py-10 m-auto">
 					<div className="flex flex-row justify-around">
-						<div className="bg-red-100">
+						<div className="flex basis-1/2">
 							<Image
-								src={data.img}
+								src={urlBuilder(img?.data?.attributes.url)}
 								width={360}
 								height={250}
 								alt="tshirt"
 							/>
 						</div>
 						{/* image container */}
-						<div className="flex flex-col justify-center ">
+						<div className="flex flex-col basis-1/2 justify-center ">
 							<h3 className="font-semibold text-gray-800 text-2xl w-[85%]">
-								{data.name}
+								{title && title}
 							</h3>
 							<h3 className="my-5 text-lg font-semibold text-gray-800">
-								$ {data.price}
+								$ {price!=null?price:''}
 							</h3>
 							<div className="flex justify-around mb-5">
 								<div className="flex items-center basis-1/2">
@@ -86,11 +86,9 @@ export default function SingleProduct() {
 						<h3 className="font-semibold">Product Description</h3>
 					</div>
 					<div className="mx-5">
-						<ul className="text-slate-600 list-disc">
-							<li>Minim eu in enim aliqua ipsum proident tempor consectetur incididunt.</li>
-							<li>Id nisi adipisicing reprehenderit incididunt elit anim. Excepteur proident duis duis consequat Lorem dolor cupidatat id incididunt amet exercitation amet ea exercitation. Ipsum consequat excepteur id aliquip dolor. Laborum officia ullamco ullamco pariatur aliquip aliqua anim cillum adipisicing cillum irure laborum excepteur est. Culpa ut enim sit deserunt do nostrud eu magna sint voluptate esse occaecat duis et. Velit ad veniam voluptate enim exercitation duis duis nisi officia excepteur aute. Ex consectetur eu sit aute mollit voluptate.</li>
-							<li>Dolore reprehenderit do eiusmod elit exercitation Lorem ullamco nostrud incididunt ullamco nisi aliquip aliqua. Cillum mollit ex amet mollit officia magna dolor Lorem ad ex commodo nisi. Voluptate quis anim non id. Laboris consequat nostrud laborum in Lorem fugiat irure ea ea. Et elit do occaecat excepteur culpa.</li>
-						</ul>
+						<div className="text-slate-600">
+							{desc && desc}
+						</div>
 					</div>
 				</section>
 			</main>
@@ -98,4 +96,4 @@ export default function SingleProduct() {
 	);
 }
 
-// export { getStaticPaths,getStaticProps, } from "@/lib/Product/ReadById";
+export { getStaticProps,getStaticPaths } from "@/lib/Product/ReadById";

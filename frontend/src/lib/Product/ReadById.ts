@@ -1,9 +1,17 @@
-import { GetStaticProps } from "next";
-import { ApiResponse } from "../types";
+import {
+	GetStaticProps,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from "next";
+import { ApiResponse, IProduct } from "../types";
 import { ParsedUrlQuery } from "querystring";
 
-interface IParams extends ParsedUrlQuery{
-    productslug:string,
+interface IParams extends ParsedUrlQuery {
+	productslug: string;
+}
+interface SPApiResponse{
+	data: IProduct
+    meta:ApiResponse['meta']
 }
 
 const getStaticPaths = async () => {
@@ -15,41 +23,44 @@ const getStaticPaths = async () => {
 			},
 		}
 	);
-    const products = await res.json() as ApiResponse
-    const data = products.data
-	const paths = products.data.map(item=>{
-        const catagory = item.attributes.catagories?.data[0].attributes.title
-        return {
-            params:{
-                productslug:item.id,
-                catagory:catagory
-            }
-        }
-    })
+	const products = (await res.json()) as ApiResponse;
+	const paths = products.data.map((item) => {
+		const catagory =
+			item.attributes?.catagories?.data[0]?.attributes?.title;
+		return {
+			params: {
+				productslug: item.id.toString(),
+				catagory: catagory,
+			},
+		};
+	});
 
-    return {
+	return {
 		paths,
 		fallback: true,
 	};
 };
 
-const getStaticProps:GetStaticProps = async (ctx)=>{
-    const {productslug,catagory} = ctx.params as IParams
-    const res = await fetch(
-		`${process.env.REACT_API_URL}/products/${productslug}`,
+async function getStaticProps(
+	ctx: GetStaticPropsContext<IParams>
+): Promise<GetStaticPropsResult<SPApiResponse>> {
+	const { productslug, catagory } = ctx.params as IParams;
+	const res = await fetch(
+		`${process.env.REACT_API_URL}/products/${productslug}?populate=*`,
 		{
 			headers: {
 				Authorization: "Bearer " + process.env.REACT_API_TOKEN,
 			},
 		}
 	);
-    const product = await res.json()  as ApiResponse;
-    
-    return {
-        props:{
-          product
-        }
-      }
+	const product = (await res.json()) as SPApiResponse;
+
+	//console.log('read by id',product);
+	return {
+		props: {
+			...product
+		},
+	};
 }
 
-export { getStaticPaths,getStaticProps };
+export { getStaticPaths, getStaticProps };

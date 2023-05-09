@@ -1,23 +1,16 @@
-import { IMediaFormat, IProduct } from "@/lib/types";
+import { IProduct } from "@/lib/types";
 import Image from "next/image";
 import React from "react";
+import { urlBuilder } from "@/util/UrlBuilder";
 interface ICard {
 	props: IProduct["attributes"];
 }
-
-const urlBuilder = (data:IMediaFormat | null| undefined) => {
-	let url = '/default.jpg'
-	if(data!=undefined && data!==null) {
-		url = process.env.REACT_API_BASE_URL + data.url
-	}
-	return url;
-};
 
 export default function Card({ props }: ICard) {
 	return (
 		<div className="bg-slate-100 relative m-3 p-2">
 			<Image
-				src={urlBuilder(props.img?.data?.attributes.formats?.small)}
+				src={urlBuilder(props.img?.data?.attributes?.url)}
 				width={320}
 				height={250}
 				alt="men"
