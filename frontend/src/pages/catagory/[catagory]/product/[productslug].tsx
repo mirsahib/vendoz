@@ -1,18 +1,21 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import { product } from "@/mock/data";
 import { InferGetStaticPropsType } from "next";
-import { getStaticPaths,getStaticProps, } from "@/lib/Product/ReadById";
+import { getStaticProps } from "@/lib/Product/ReadById";
 import { urlBuilder } from "@/util/UrlBuilder";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 
 const data = product[0];
 
-export default function SingleProduct(product:InferGetStaticPropsType<typeof getStaticProps>) {
-	const {title,desc,price,img,img2} = product.data?.attributes
-	
+export default function SingleProduct(
+	product: InferGetStaticPropsType<typeof getStaticProps>
+) {
+	const { title, desc, price, img, img2 } = product.data?.attributes;
+
 	return (
 		<>
 			<Head>
@@ -49,7 +52,7 @@ export default function SingleProduct(product:InferGetStaticPropsType<typeof get
 								{title && title}
 							</h3>
 							<h3 className="my-5 text-lg font-semibold text-gray-800">
-								$ {price!=null?price:''}
+								$ {price != null ? price : ""}
 							</h3>
 							<div className="flex justify-around mb-5">
 								<div className="flex items-center basis-1/2">
@@ -86,9 +89,7 @@ export default function SingleProduct(product:InferGetStaticPropsType<typeof get
 						<h3 className="font-semibold">Product Description</h3>
 					</div>
 					<div className="mx-5">
-						<div className="text-slate-600">
-							{desc && desc}
-						</div>
+						{desc && <ReactMarkdown remarkPlugins={[remarkGfm]} children={desc} /> }
 					</div>
 				</section>
 			</main>
@@ -96,4 +97,4 @@ export default function SingleProduct(product:InferGetStaticPropsType<typeof get
 	);
 }
 
-export { getStaticProps,getStaticPaths } from "@/lib/Product/ReadById";
+export { getStaticProps, getStaticPaths } from "@/lib/Product/ReadById";
