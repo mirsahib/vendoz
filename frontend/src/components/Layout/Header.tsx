@@ -83,7 +83,7 @@ function Header() {
 									<Link
 										className="flex p-2"
 										onClick={() => setIsOpenUser(false)}
-										href={"/signin"}
+										href={"/user/signin"}
 									>
 										Sign In
 									</Link>
@@ -92,7 +92,7 @@ function Header() {
 									<Link
 										className="flex p-2"
 										onClick={() => setIsOpenUser(false)}
-										href={"/register"}
+										href={"/user/register"}
 									>
 										Register
 									</Link>
@@ -101,7 +101,7 @@ function Header() {
 									<Link
 										className="flex p-2"
 										onClick={() => setIsOpenUser(false)}
-										href={"/cart"}
+										href={"/user/cart"}
 									>
 										View Cart
 									</Link>
@@ -110,7 +110,7 @@ function Header() {
 									<Link
 										className="flex p-2"
 										onClick={() => setIsOpenUser(false)}
-										href={"/wishlist"}
+										href={"/user/wishlist"}
 									>
 										Wishlist
 									</Link>
