@@ -7,15 +7,17 @@ import { InferGetStaticPropsType } from "next";
 import { getStaticProps } from "@/lib/Product/ReadById";
 import { urlBuilder } from "@/util/UrlBuilder";
 import ReactMarkdown from "react-markdown";
-import remarkGfm from 'remark-gfm'
+import remarkGfm from "remark-gfm";
+import { useRouter } from "next/router";
 
 const data = product[0];
 
 export default function SingleProduct(
 	product: InferGetStaticPropsType<typeof getStaticProps>
 ) {
+	const router = useRouter();
+	const { catagory } = router.query;
 	const { title, desc, price, img, img2 } = product.data?.attributes;
-
 	return (
 		<>
 			<Head>
@@ -23,17 +25,12 @@ export default function SingleProduct(
 			</Head>
 			<main>
 				<div className="bg-slate-100 py-1">
-					<ul className="flex w-[75%] text-gray-700 text-sm m-auto">
-						<li>
-							<Link href={"/"}>HOME/</Link>
-						</li>
-						<li>
-							<Link href={"/"}>MEN/</Link>
-						</li>
-						<li>
-							<Link href={"/"}>T-Shirt</Link>
-						</li>
-					</ul>
+					<div className="w-[76%] m-auto text-slate-600">
+						<Link replace href={`/catagory/${catagory}`}>
+							<span className=" font-semibold">Catagory: </span>{" "}
+							/{catagory}
+						</Link>
+					</div>
 				</div>
 				{/* nav section */}
 				<section className="w-[80%] py-10 m-auto">
@@ -89,7 +86,12 @@ export default function SingleProduct(
 						<h3 className="font-semibold">Product Description</h3>
 					</div>
 					<div className="mx-5">
-						{desc && <ReactMarkdown remarkPlugins={[remarkGfm]} children={desc} /> }
+						{desc && (
+							<ReactMarkdown
+								remarkPlugins={[remarkGfm]}
+								children={desc}
+							/>
+						)}
 					</div>
 				</section>
 			</main>

@@ -2,13 +2,16 @@ import { IProduct } from "@/lib/types";
 import Image from "next/image";
 import React from "react";
 import { urlBuilder } from "@/util/UrlBuilder";
-interface ICard {
+interface ICard{
 	props: IProduct["attributes"];
 }
 
 export default function Card({ props }: ICard) {
+	const truncate = (input:string|null)=>{
+		return input!=null && input.length>45? `${input.substring(0,45)}...`:input
+	}
 	return (
-		<div className="bg-slate-100 relative m-3 p-2">
+		<div className="bg-slate-100 relative m-2 p-2 h-[32em] ">
 			<Image
 				src={urlBuilder(props.img?.data?.attributes?.url)}
 				width={320}
@@ -24,7 +27,7 @@ export default function Card({ props }: ICard) {
 			<div className="px-5">
 				<div className="flex flex-col my-2">
 					<h4 className="text-gray-800 text-lg  mb-2">
-						{props?.title}
+						{truncate(props?.title)}
 					</h4>
 					<div className="flex ">
 						<h3 className="p-1 font-bold text-xs bg-blue-900 text-white">
