@@ -1,14 +1,14 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import Contact from './Contact'
-import Links from './Links'
+import Contact from '@/components/Contact'
+import Links from '@/components/Links'
 
 interface ILayout {
     children:React.ReactNode
 }
 
-export default function Layout({children}:ILayout) {
+export default function MainLayout({children}:ILayout) {
   return (
     <div>
         <Header />
