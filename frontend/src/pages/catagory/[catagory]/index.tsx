@@ -25,13 +25,13 @@ export default function Catagory(
 					</div>
 				</div>
 				{/* nav section */}
-				<section className="flex lg:w-[75%] sm:w-[95%] m-auto my-8">
+				<section className="flex  lg:w-[75%] sm:w-[95%] m-auto my-8">
 					<ul className="flex flex-wrap">
 						{products.data.map((item) => {
 							return (
 								<li
 									key={item.id}
-									className="flex flex-col  lg:basis-1/4 sm:basis-1/2"
+									className="flex flex-col basis-full  lg:basis-1/4 sm:basis-1/2"
 								>
 									<Link
 										href={`./${catagory}/product/${item.id}`}

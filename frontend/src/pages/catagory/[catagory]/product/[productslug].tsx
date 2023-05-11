@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { product } from "@/mock/data";
 import { InferGetStaticPropsType } from "next";
 import { getStaticProps } from "@/lib/Product/ReadById";
 import { urlBuilder } from "@/util/UrlBuilder";
@@ -10,7 +9,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useRouter } from "next/router";
 
-const data = product[0];
 
 export default function SingleProduct(
 	product: InferGetStaticPropsType<typeof getStaticProps>
@@ -33,8 +31,8 @@ export default function SingleProduct(
 					</div>
 				</div>
 				{/* nav section */}
-				<section className="lg:w-[80%] sm:w-[95%] py-10 m-auto">
-					<div className="flex lg:flex-row sm:flex-col sm:items-center justify-around">
+				<section className="w-[95%] lg:w-[80%] sm:w-[95%]  py-10 m-auto">
+					<div className="flex flex-col lg:flex-row sm:flex-col sm:items-center justify-around">
 						<div className="flex basis-1/2">
 							<Image
 								src={urlBuilder(img?.data?.attributes.url)}
@@ -45,7 +43,7 @@ export default function SingleProduct(
 						</div>
 						{/* image container */}
 						<div className="flex flex-col basis-1/2 justify-center">
-							<h3 className="font-semibold text-gray-800 text-2xl" >
+							<h3 className="font-semibold text-gray-800 text-base sm:text-lg lg:text-2xl" >
 								{title && title}
 							</h3>
 							<h3 className="my-5 text-lg font-semibold text-gray-800">
@@ -66,7 +64,7 @@ export default function SingleProduct(
 									</div>
 								</div>
 								<div className="flex basis-1/2 justify-end">
-									<button className="bg-blue-700 hover:bg-blue-500 text-white p-3 rounded">
+									<button className="bg-blue-700 hover:bg-blue-500 text-white p-1 text-xs lg:text-base sm:text-base font-medium rounded">
 										ADD TO CART
 									</button>
 								</div>
