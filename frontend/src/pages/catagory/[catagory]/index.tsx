@@ -9,32 +9,31 @@ import { useRouter } from "next/router";
 export default function Catagory(
 	products: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  const router = useRouter()
-  const {catagory} = router.query
+	const router = useRouter();
+	const { catagory } = router.query;
 	return (
 		<>
 			<Head>
 				<title>Vendoz Online Shop</title>
 			</Head>
 			<main>
-      <div className="bg-slate-100 py-1">
-					<div className="w-[76%] m-auto text-slate-600">
+				<div className="bg-slate-100 py-1">
+					<div className="lg:w-[76%] sm:w-[90%] m-auto text-slate-600">
 						<Link replace href={`/`}>
-							<span className=" font-semibold">Catagory: </span>{" "}
-							/
+							<span className=" font-semibold">Catagory: </span> /
 						</Link>
 					</div>
 				</div>
 				{/* nav section */}
-				<section className="flex w-[75%] m-auto">
+				<section className="flex lg:w-[75%] sm:w-[95%] m-auto my-8">
 					<ul className="flex flex-wrap">
 						{products.data.map((item) => {
 							return (
 								<li
 									key={item.id}
-									className="flex flex-col basis-1/4"
+									className="flex flex-col  lg:basis-1/4 sm:basis-1/2"
 								>
-									<Link 
+									<Link
 										href={`./${catagory}/product/${item.id}`}
 									>
 										<Card props={item.attributes} />

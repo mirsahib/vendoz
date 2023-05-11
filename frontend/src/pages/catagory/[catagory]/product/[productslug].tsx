@@ -25,7 +25,7 @@ export default function SingleProduct(
 			</Head>
 			<main>
 				<div className="bg-slate-100 py-1">
-					<div className="w-[76%] m-auto text-slate-600">
+					<div className="lg:w-[76%] sm:w-[90%] m-auto text-slate-600">
 						<Link replace href={`/catagory/${catagory}`}>
 							<span className=" font-semibold">Catagory: </span>{" "}
 							/{catagory}
@@ -33,8 +33,8 @@ export default function SingleProduct(
 					</div>
 				</div>
 				{/* nav section */}
-				<section className="w-[80%] py-10 m-auto">
-					<div className="flex flex-row justify-around">
+				<section className="lg:w-[80%] sm:w-[95%] py-10 m-auto">
+					<div className="flex lg:flex-row sm:flex-col sm:items-center justify-around">
 						<div className="flex basis-1/2">
 							<Image
 								src={urlBuilder(img?.data?.attributes.url)}
@@ -44,35 +44,35 @@ export default function SingleProduct(
 							/>
 						</div>
 						{/* image container */}
-						<div className="flex flex-col basis-1/2 justify-center ">
-							<h3 className="font-semibold text-gray-800 text-2xl w-[85%]">
+						<div className="flex flex-col basis-1/2 justify-center">
+							<h3 className="font-semibold text-gray-800 text-2xl" >
 								{title && title}
 							</h3>
 							<h3 className="my-5 text-lg font-semibold text-gray-800">
 								$ {price != null ? price : ""}
 							</h3>
-							<div className="flex justify-around mb-5">
-								<div className="flex items-center basis-1/2">
+							<div className="flex  mb-5">
+								<div className="flex items-center basis-1/2 " >
 									<div className="mr-10">
-										<button className="bg-slate-200 p-5 rounded">
+										<button className="bg-slate-200 p-4 rounded">
 											<i className="fas fa-minus"></i>
 										</button>
 									</div>
 									<div>1</div>
 									<div className="ml-10">
-										<button className="bg-slate-200 p-5 rounded">
+										<button className="bg-slate-200 p-4 rounded">
 											<i className="fas fa-plus"></i>
 										</button>
 									</div>
 								</div>
-								<div className="flex basis-1/2 ">
-									<button className="bg-blue-700 text-white p-3 rounded">
+								<div className="flex basis-1/2 justify-end">
+									<button className="bg-blue-700 hover:bg-blue-500 text-white p-3 rounded">
 										ADD TO CART
 									</button>
 								</div>
 							</div>
 							<div className="flex text-white">
-								<button className="bg-blue-700 hover:bg-blue-500 p-5 w-[90%] rounded font-semibold">
+								<button className="bg-blue-700 hover:bg-blue-500 p-5 w-full rounded font-semibold">
 									BUY NOW
 								</button>
 							</div>
