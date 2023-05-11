@@ -18,7 +18,7 @@ export default function Product({products}:IProductList) {
 			<ul className="flex flex-wrap">
 				{products.map((item) => {
 					return (
-						<li key={item.id} className="flex flex-col basis-1/4">
+						<li key={item.id} className="flex flex-col lg:basis-1/4 sm:basis-1/2">
 							<Link href={`catagory/${item.attributes.catagories?.data[0].attributes.title}/product/${item.id}`}>
 								<Card props={item.attributes}/>
 							</Link>

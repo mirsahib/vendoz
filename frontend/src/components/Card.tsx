@@ -13,7 +13,7 @@ export default function Card({ props }: ICard) {
 			: input;
 	};
 	return (
-		<div className="flex flex-col justify-evenly bg-slate-100 relative m-2 pb-5 h-96 shadow-md hover:shadow-lg">
+		<div className="flex flex-col justify-evenly bg-slate-100 relative m-3 pb-5 h-96 shadow-md hover:shadow-lg">
 			<div className="relative w-[100%] h-[90%] mx-auto overflow-hidden">
 				<Image
 					src={urlBuilder(props.img?.data?.attributes?.url)}
