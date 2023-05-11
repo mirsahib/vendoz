@@ -3,7 +3,7 @@ import ImageContainer from "./ImageContainer";
 
 export default function Catagory() {
 	return (
-		<section className="flex lg:flex-row sm:flex-col">
+		<section className="flex flex-col lg:flex-row sm:flex-col">
 			<div className="flex basis-1/2">
 				<div className="flex flex-col basis-1/2">
 					<ImageContainer

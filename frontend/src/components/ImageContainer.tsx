@@ -21,7 +21,7 @@ export default function ImageContainer({name,width,height,url}:IImgContainer) {
 			/>
 
 			<div className="top-1/2 left-[40%] text-gray-700 absolute">
-				<button className="p-3 rounded bg-blue-600 text-white  hover:bg-white hover:text-gray-800">
+				<button className="p-1 sm:p-3 rounded bg-blue-600 text-white text-xs sm:text-base hover:bg-white hover:text-gray-800">
 					{name}
 				</button>
 			</div>
