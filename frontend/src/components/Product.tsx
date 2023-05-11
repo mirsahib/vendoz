@@ -10,7 +10,7 @@ interface IProductList{
 
 export default function Product({products}:IProductList) {
 	return (
-		<section className="flex flex-col item-center justify-center w-[90%] m-auto">
+		<section className="flex flex-col item-center justify-center w-[90%] m-auto my-8">
 			<div className="flex flex-col items-center justify-center my-5">
 				<h1 className="text-2xl">Best Seller</h1>
 				<p className="text-lg">Top products</p>

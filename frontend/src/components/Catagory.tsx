@@ -3,7 +3,7 @@ import ImageContainer from "./ImageContainer";
 
 export default function Catagory() {
 	return (
-		<section className="flex">
+		<section className="flex lg:flex-row sm:flex-col">
 			<div className="flex basis-1/2">
 				<div className="flex flex-col basis-1/2">
 					<ImageContainer
@@ -13,7 +13,7 @@ export default function Catagory() {
 						url="/men-cat.jpg"
 					/>
 					<ImageContainer
-						name="MEN"
+						name="WOMEN"
 						width={320}
 						height={260}
 						url="/women-cat.jpg"
@@ -21,7 +21,7 @@ export default function Catagory() {
 				</div>
 				<div className="flex basis-1/2">
 					<ImageContainer
-						name="MEN"
+						name="SALE"
 						width={320}
 						height={560}
 						url="/women-cat-2.jpg"
@@ -39,7 +39,7 @@ export default function Catagory() {
 					/>
 
 					<ImageContainer
-						name="MEN"
+						name="Accessories"
 						width={320}
 						height={260}
 						url="/access.jpg"
@@ -47,7 +47,7 @@ export default function Catagory() {
 				</div>
 				<div>
 					<ImageContainer
-						name="MEN"
+						name="Shoes"
 						width={640}
 						height={270}
 						url="/shoe-cat.jpg"
