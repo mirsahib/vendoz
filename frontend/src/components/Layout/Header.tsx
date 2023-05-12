@@ -16,7 +16,7 @@ function Header() {
 	};
 
 	return (
-		<div className="py-3">
+		<div className="py-3 border-b-2 border-gray-200">
 			<nav className="flex justify-between items-center w-[95%] lg:w-[80%] sm:w-[90%] mx-auto">
 				<div className="flex basis-1/4 flex-row gap-8 items-center ">
 					<Link href="/">
@@ -86,15 +86,6 @@ function Header() {
 										href={"/user/signin"}
 									>
 										Sign In
-									</Link>
-								</li>
-								<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
-									<Link
-										className="flex p-2"
-										onClick={() => setIsOpenUser(false)}
-										href={"/user/register"}
-									>
-										Register
 									</Link>
 								</li>
 								<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
