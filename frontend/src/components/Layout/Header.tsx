@@ -17,7 +17,7 @@ function Header() {
 
 	return (
 		<div className="py-3">
-			<nav className="flex justify-between items-center w-[95%] lg:w[90%] sm:w-[90%] mx-auto">
+			<nav className="flex justify-between items-center w-[95%] lg:w-[80%] sm:w-[90%] mx-auto">
 				<div className="flex basis-1/4 flex-row gap-8 items-center ">
 					<Link href="/">
 						<h1 className="text-xl font-semibold text-blue-700">
