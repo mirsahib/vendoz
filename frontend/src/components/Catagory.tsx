@@ -10,13 +10,13 @@ export default function Catagory() {
 						name="MEN"
 						width={320}
 						height={260}
-						url="/men-cat.jpg"
+						url="/images/men-cat.jpg"
 					/>
 					<ImageContainer
 						name="WOMEN"
 						width={320}
 						height={260}
-						url="/women-cat.jpg"
+						url="/images/women-cat.jpg"
 					/>
 				</div>
 				<div className="flex basis-1/2">
@@ -24,7 +24,7 @@ export default function Catagory() {
 						name="SALE"
 						width={320}
 						height={560}
-						url="/women-cat-2.jpg"
+						url="/images/women-cat-2.jpg"
 					/>
 				</div>
 			</div>{" "}
@@ -35,14 +35,14 @@ export default function Catagory() {
 						name="MEN"
 						width={320}
 						height={260}
-						url="/men-cat.jpg"
+						url="/images/men-cat.jpg"
 					/>
 
 					<ImageContainer
 						name="Accessories"
 						width={320}
 						height={260}
-						url="/access.jpg"
+						url="/images/access.jpg"
 					/>
 				</div>
 				<div>
@@ -50,7 +50,7 @@ export default function Catagory() {
 						name="Shoes"
 						width={640}
 						height={270}
-						url="/shoe-cat.jpg"
+						url="/images/shoe-cat.jpg"
 					/>
 				</div>
 			</div>{" "}
