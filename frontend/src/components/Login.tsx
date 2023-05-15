@@ -9,11 +9,19 @@ export default function Login({ setRedirect }: ILogin) {
 	return (
 		<section className="flex justify-center items-center py-8">
 			<div className="flex flex-col items-center w-[24em] lg:w-[30em] sm:w-[22em]">
-				<div className="mb-5 flex w-[90%] lg:w-[67%] sm:w-[82%] ">
-					<h1 className=" text-2xl">Login or Sign up</h1>
+				<div className="w-[90%] lg:w-[67%] flex flex-row items-center justify-between mb-5">
+					<h1 className="text-2xl">Login</h1>
+					<button
+						onClick={() => {
+							setRedirect(true);
+						}}
+						className="text-blue-600 font-semibold underline text-sm"
+					>
+						or create an account
+					</button>
 				</div>
 
-				<div className="mb-5">
+				{/* <div className="mb-5">
 					<button className=" w-72 lg:w-80 flex items-center justify-evenly py-2 border border-gray-400">
 						<Image
 							src={"/icon/google.svg"}
@@ -23,9 +31,9 @@ export default function Login({ setRedirect }: ILogin) {
 						/>
 						<span className="text-sm">Continue with Google</span>
 					</button>
-				</div>
+				</div> */}
 				{/* google login */}
-				<div className="mb-5">
+				{/* <div className="mb-5">
 					<button className="w-72 lg:w-80 flex items-center justify-evenly py-2 border border-gray-400">
 						<Image
 							src={"/icon/apple.svg"}
@@ -35,16 +43,18 @@ export default function Login({ setRedirect }: ILogin) {
 						/>
 						<span className="text-sm">Continue with Google</span>
 					</button>
-				</div>
+				</div> */}
 				{/* apple login */}
 
-				<div className="flex flex-row items-center mb-5">
+				{/* <div className="flex flex-row items-center mb-5">
 					<div className="w-24 border-t border-gray-400 flex"></div>
 					<span className="mx-4">or</span>
 					<div className="w-24 border-t border-gray-400 flex"></div>{" "}
-				</div>
+				</div> */}
 
-				<form onSubmit={() => setRedirect(true)} className="flex flex-col items-center">
+				<form
+					className="flex flex-col items-center"
+				>
 					<div className="w-72 lg:w-80 flex flex-col mb-5">
 						<label htmlFor="email" className="text-xs mb-1">
 							Email
@@ -55,9 +65,18 @@ export default function Login({ setRedirect }: ILogin) {
 							placeholder="yoursemail@domain.com"
 						/>
 					</div>
+					<div className="w-72 lg:w-80 flex flex-col mb-5">
+						<label htmlFor="email" className="text-xs mb-1">
+							Password
+						</label>
+						<input
+							className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+							type="password"
+						/>
+					</div>
 					<div className="mb-10">
 						<button className="w-72 lg:w-80 h-12 bg-blue-600 text-white font-semibold">
-							Continue
+							Login
 						</button>
 					</div>
 				</form>
