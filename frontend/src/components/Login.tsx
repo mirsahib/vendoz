@@ -1,11 +1,27 @@
 import Image from "next/image";
 import React, { SetStateAction } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 interface ILogin {
 	setRedirect: React.Dispatch<SetStateAction<boolean>>;
 }
 
+interface ILoginInputs {
+	email: string;
+	password: string;
+}
+
 export default function Login({ setRedirect }: ILogin) {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm<ILoginInputs>();
+	const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
+		console.log('login',data);
+	};
+
 	return (
 		<section className="flex justify-center items-center py-8">
 			<div className="flex flex-col items-center w-[24em] lg:w-[30em] sm:w-[22em]">
@@ -52,34 +68,44 @@ export default function Login({ setRedirect }: ILogin) {
 					<div className="w-24 border-t border-gray-400 flex"></div>{" "}
 				</div> */}
 
-				<form
-					className="flex flex-col items-center"
-				>
-					<div className="w-72 lg:w-80 flex flex-col mb-5">
-						<label htmlFor="email" className="text-xs mb-1">
-							Email
-						</label>
-						<input
-							className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
-							type="email"
-							placeholder="yoursemail@domain.com"
-						/>
-					</div>
-					<div className="w-72 lg:w-80 flex flex-col mb-5">
-						<label htmlFor="email" className="text-xs mb-1">
-							Password
-						</label>
-						<input
-							className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
-							type="password"
-						/>
-					</div>
-					<div className="mb-10">
-						<button className="w-72 lg:w-80 h-12 bg-blue-600 text-white font-semibold">
-							Login
-						</button>
-					</div>
-				</form>
+				<div>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="flex flex-col items-center"
+					>
+						<div className="w-72 lg:w-80 flex flex-col mb-5">
+							<label htmlFor="email" className="text-xs mb-1">
+								Email
+							</label>
+							<input
+								className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+								type="email"
+								placeholder="yoursemail@domain.com"
+								{...(register("email"))}
+								required
+							/>
+						</div>
+						<div className="w-72 lg:w-80 flex flex-col mb-5">
+							<label htmlFor="email" className="text-xs mb-1">
+								Password
+							</label>
+							<input
+								className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+								type="password"
+								{...(register("password"))}
+								required
+								minLength={8}
+							/>
+						</div>
+						<div className="mb-10">
+							<input
+								type="submit"
+								value={"Login"}
+								className="w-72 lg:w-80 h-12 bg-blue-600 hover:bg-blue-500 text-white font-semibold cursor-pointer"
+							/>
+						</div>
+					</form>
+				</div>
 			</div>
 			{/* signin form container */}
 		</section>
