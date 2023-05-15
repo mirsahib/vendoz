@@ -22,7 +22,7 @@ export default function cart() {
 									<div className="flex lg:flex-row  lg:justify-between lg:items-center">
 										<div className="flex relative w-[120px] h-[150px] lg:basis-[10%] mr-5 lg:mr-0">
 											<Image
-												src={"/t-shirt.jpg"}
+												src={"/images/t-shirt.jpg"}
 												fill
 												alt={""}
                         style={{objectFit:'contain'}}
