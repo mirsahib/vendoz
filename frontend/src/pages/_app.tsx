@@ -1,11 +1,15 @@
-import {MainLayout} from "@/components/Layout";
+import { MainLayout } from "@/components/Layout";
+import store from "@/store";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { Provider } from "react-redux";
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<MainLayout>
-			<Component {...pageProps} />
-		</MainLayout>
+		<Provider store={store}>
+			<MainLayout>
+				<Component {...pageProps} />
+			</MainLayout>
+		</Provider>
 	);
 }
