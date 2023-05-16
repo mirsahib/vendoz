@@ -1,6 +1,7 @@
 import Image from "next/image";
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { generateUsername } from "unique-username-generator";
 
 interface IRegisterForm {
 	firstName: string;
@@ -20,9 +21,25 @@ export default function Register({ setRedirect }: IRegister) {
 		watch,
 		formState: { errors },
 	} = useForm<IRegisterForm>();
-	const onSubmit: SubmitHandler<IRegisterForm> = (data) => {
-		console.log("register", data);
+	const onSubmit: SubmitHandler<IRegisterForm> = async (data) => {
+		const userName = generateUsername();
+		const formData = { ...data, username: userName };
+		console.log("register", formData);
+		try {
+			const res = await fetch("/api/register", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+			const response = await res.json();
+			console.log('reg component',response);
+		} catch (error) {
+			console.log("register component", error);
+		}
 	};
+	
 
 	return (
 		<section className="flex justify-center items-center py-8">
@@ -40,16 +57,19 @@ export default function Register({ setRedirect }: IRegister) {
 				</div>
 
 				<div>
-					<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center" >
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="flex flex-col items-center"
+					>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
 							<label htmlFor="email" className="text-xs mb-1">
 								Email
 							</label>
 							<input
-								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+								className={`h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3`}
 								type="email"
 								placeholder="yoursemail@domain.com"
-								{...register('email')}
+								{...(register("email"))}
 							/>
 						</div>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
@@ -59,7 +79,7 @@ export default function Register({ setRedirect }: IRegister) {
 							<input
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="text"
-								{...register('firstName')}
+								{...register("firstName")}
 							/>
 						</div>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
@@ -69,7 +89,7 @@ export default function Register({ setRedirect }: IRegister) {
 							<input
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="text"
-								{...register('lastName')}
+								{...register("lastName")}
 							/>
 						</div>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
@@ -79,7 +99,7 @@ export default function Register({ setRedirect }: IRegister) {
 							<input
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="password"
-								{...register('password')}
+								{...register("password")}
 							/>
 						</div>
 						<div className="w-72 lg:w-80 my-10">

@@ -18,8 +18,21 @@ export default function Login({ setRedirect }: ILogin) {
 		watch,
 		formState: { errors },
 	} = useForm<ILoginInputs>();
-	const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
-		console.log('login',data);
+	const onSubmit: SubmitHandler<ILoginInputs> = async (formData) => {
+		console.log("login", formData);
+		try {
+			const res = await fetch("/api/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+			const response = await res.json();
+			console.log("login response", response.data);
+		} catch (error) {
+			console.log('login component',error)
+		}
 	};
 
 	return (
@@ -81,7 +94,7 @@ export default function Login({ setRedirect }: ILogin) {
 								className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="email"
 								placeholder="yoursemail@domain.com"
-								{...(register("email"))}
+								{...register("email")}
 								required
 							/>
 						</div>
@@ -92,7 +105,7 @@ export default function Login({ setRedirect }: ILogin) {
 							<input
 								className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="password"
-								{...(register("password"))}
+								{...register("password")}
 								required
 								minLength={8}
 							/>
