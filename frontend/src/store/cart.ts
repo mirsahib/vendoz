@@ -1,13 +1,10 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-// import { IPlant } from '@/types';
-interface IPlant{
-    id: string;
-    price: number;
-}
+import { IProduct } from '@/lib/types';
+
 
 export interface InitialStateType {
     itemList: Array<{
-        product: IPlant | null;
+        product: IProduct | null;
         count: number;
         productPrice: number;
     }>;
@@ -31,17 +28,18 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addToCart(state, action: PayloadAction<IPlant>) {
+        addToCart(state, action: PayloadAction<IProduct>) {
             
             const newItem = action.payload;
+            const newItemprice = action.payload.attributes.price?action.payload.attributes.price:0
             const productCount = state.totalItem;
             //check if cart is empty
             if (productCount == 0) {
                 state.itemList = [
-                    { product: newItem, count: 1, productPrice: newItem.price }
+                    { product: newItem, count: 1, productPrice: newItemprice}
                 ];
                 state.totalItem = state.totalItem + 1;
-                state.totalPrice = state.totalPrice + newItem.price;
+                state.totalPrice = state.totalPrice + newItemprice;
             } else {
                 const productIndex = state.itemList.findIndex(
                     (item) => item.product?.id == newItem.id
@@ -51,21 +49,22 @@ const cartSlice = createSlice({
                     state.itemList.push({
                         product: newItem,
                         count: 1,
-                        productPrice: newItem.price
+                        productPrice: newItemprice
                     });
                     state.totalItem = state.totalItem + 1;
-                    state.totalPrice = state.totalPrice + newItem.price;
+                    state.totalPrice = state.totalPrice + newItemprice;
                 }
             }
             console.log('redux',current(state))
         },
-        increaseCart(state, action: PayloadAction<IPlant>) {
+        increaseCart(state, action: PayloadAction<IProduct>) {
             const newItem = action.payload;
+            const newItemprice = action.payload.attributes.price?action.payload.attributes.price:0
             const productCount = state.totalItem;
             //check if cart is empty
             if (productCount == 0) {
                 state.itemList = [
-                    { product: newItem, count: 1, productPrice: newItem.price }
+                    { product: newItem, count: 1, productPrice: newItemprice }
                 ];
             } else {
                 const productIndex = state.itemList.findIndex(
@@ -76,21 +75,22 @@ const cartSlice = createSlice({
                     const stateProduct = state.itemList[productIndex];
                     stateProduct.count = stateProduct.count + 1;
                     stateProduct.productPrice =
-                        stateProduct.productPrice + newItem.price;
+                        stateProduct.productPrice + newItemprice;
                     state.itemList[productIndex] = stateProduct;
                 } else {
                     state.itemList.push({
                         product: newItem,
                         count: 1,
-                        productPrice: newItem.price
+                        productPrice: newItemprice
                     });
                 }
             }
-            state.totalPrice = state.totalPrice + newItem.price;
+            state.totalPrice = state.totalPrice + newItemprice;
             console.log('increase',current(state))
         },
-        decreaseCart(state, action: PayloadAction<IPlant>) {
+        decreaseCart(state, action: PayloadAction<IProduct>) {
             const newItem = action.payload;
+            const newItemprice = action.payload.attributes.price?action.payload.attributes.price:0
             const productCount = state.totalItem;
             //check if cart is empty
             if (productCount != 0) {
@@ -106,16 +106,16 @@ const cartSlice = createSlice({
                         const stateProduct = state.itemList[productIndex];
                         stateProduct.count = stateProduct.count - 1;
                         stateProduct.productPrice =
-                            stateProduct.productPrice - newItem.price;
+                            stateProduct.productPrice - newItemprice;
                         state.itemList[productIndex] = stateProduct;
                     }
-                    state.totalPrice = state.totalPrice - newItem.price;
+                    state.totalPrice = state.totalPrice - newItemprice;
                     // state.totalItem = state.totalItem - 1;
                 }
             }
             console.log('decrease',current(state))
         },
-        removeFromCart(state, action: PayloadAction<IPlant>) {
+        removeFromCart(state, action: PayloadAction<IProduct>) {
             const newItem = action.payload;
             const productIndex = state.itemList.findIndex(
                 ({ product }) => product?.id === newItem.id
