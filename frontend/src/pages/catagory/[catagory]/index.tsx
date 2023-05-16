@@ -36,7 +36,7 @@ export default function Catagory(
 									<Link
 										href={`./${catagory}/product/${item.id}`}
 									>
-										<Card props={item.attributes} />
+										<Card props={item} />
 									</Link>
 								</li>
 							);
