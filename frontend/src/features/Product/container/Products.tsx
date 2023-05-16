@@ -20,7 +20,7 @@ export default function Product({products}:IProductList) {
 					return (
 						<li key={item.id} className="flex flex-col lg:basis-1/4 sm:basis-1/2">
 							<Link href={`catagory/${item.attributes.catagories?.data[0].attributes.title}/product/${item.id}`}>
-								<Card props={item.attributes}/>
+								<Card props={item}/>
 							</Link>
 						</li>
 					);
