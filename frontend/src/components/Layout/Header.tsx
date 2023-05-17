@@ -1,7 +1,9 @@
+import { useAppSelector } from "@/store";
 import Link from "next/link";
 import React, { ReactNode, useState } from "react";
 
 function Header() {
+	const totalItem = useAppSelector(state=>state.cartStore.totalItem)
 	const [isOpenUser, setIsOpenUser] = useState(false);
 	const [isOpenCart,setIsOpenCart] = useState(false);
 	const ConditionalRender = ({
@@ -45,7 +47,7 @@ function Header() {
 							></i>
 						</button>
 						<span className=" flex absolute -top-2 left-3  bg-blue-700 text-xs w-4 h-4  rounded-full text-white items-center justify-center">
-							0
+							{totalItem}
 						</span>
 						<ConditionalRender condition={isOpenCart}>
 							<button
