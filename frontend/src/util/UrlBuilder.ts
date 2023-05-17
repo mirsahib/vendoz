@@ -1,7 +1,6 @@
-import { IMediaFormat } from "@/lib/types";
 
 export const urlBuilder = (data:string|undefined) => {
-	let url = '/default.jpg'
+	let url = '/images/default.jpg'
 	if(data!=undefined) {
 		url = process.env.REACT_API_BASE_URL + data
 	}
