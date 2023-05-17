@@ -1,7 +1,12 @@
+import ViewCartItem from "./components/ViewCartItem";
 import Products from "./container/Products";
 
-const section = {
-    Products: Products
+const Container = {
+    ProductSection: Products
 }
 
-export default section
+const Component = {
+    ViewCartItem:ViewCartItem
+}
+
+export default {Container, Component}
