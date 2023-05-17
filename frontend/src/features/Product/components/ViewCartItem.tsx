@@ -44,7 +44,7 @@ export default function ViewCartItem({
 					<div className="">
 						{" "}
 						<p className=" font-medium hidden lg:flex sm:hidden">
-							{products.product?.attributes.price}
+							$ {products.product?.attributes.price}
 						</p>
 					</div>
 					<div className="flex flex-row items-center my-4 lg:my-0 sm:my-0">
@@ -59,7 +59,7 @@ export default function ViewCartItem({
 					<div>
 						{" "}
 						<div className="font-medium">
-							{products.productPrice}
+							$ {products.productPrice}
 						</div>
 					</div>
 				</div>
