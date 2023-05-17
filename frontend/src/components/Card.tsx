@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { urlBuilder } from "@/util/UrlBuilder";
 import { truncate } from "@/util/truncate";
-import { addItemToCart } from "@/features/Product/action/addToCart";
+import { addItem } from "@/features/Product/action/cartAction";
 import { useAppDispatch } from "@/store";
 interface ICard {
 	props: IProduct;
@@ -39,7 +39,7 @@ export default function Card({ props }: ICard) {
 					<h4 className="text-gray-800 text-lg  mb-2">
 						{truncate(product?.title)}
 					</h4>
-					<div className="flex ">
+					<div className="flex">
 						<h3 className="p-1 font-bold text-xs bg-blue-900 text-white">
 							{product?.type}
 						</h3>
@@ -53,7 +53,7 @@ export default function Card({ props }: ICard) {
 						onClick={(e) => {
 							e.preventDefault();
 							e.stopPropagation();
-							dispatch(addItemToCart(props))
+							dispatch(addItem(props))
 						}}
 						className="p-2 bg-blue-700 hover:bg-blue-600 text-white rounded"
 					>
