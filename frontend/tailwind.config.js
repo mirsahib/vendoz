@@ -16,6 +16,9 @@ module.exports = {
       },
       fontFamily:{
         'comme':['Comme','sans-serif']
+      },
+      transitionProperty:{
+        'height':'height',
       }
     },
   },
