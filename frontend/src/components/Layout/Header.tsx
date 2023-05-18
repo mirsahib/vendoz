@@ -1,129 +1,152 @@
 import { useAppSelector } from "@/store";
 import Link from "next/link";
-import React, { ReactNode, useState } from "react";
-
+import React, { ReactNode, useEffect, useState } from "react";
+import DropdownMenu from "../DropdownMenu";
+import ConditionalWrapper from "../ConditionalWrapper";
+import useDelayUnMount from "@/hooks/useDelayUnMount";
+import Image from "next/image";
 function Header() {
-	const totalItem = useAppSelector(state=>state.cartStore.totalItem)
+	const totalItem = useAppSelector((state) => state.cartStore.totalItem);
 	const [isOpenUser, setIsOpenUser] = useState(false);
-	const [isOpenCart,setIsOpenCart] = useState(false);
-	const ConditionalRender = ({
-		children,
-		condition,
-	}: {
-		children: React.ReactNode;
-		condition: boolean;
-	}) => {
-		if (condition) return <>{children}</>;
-		return <></>;
-	};
+	const [isSearchActive, isSetSearchActive] = useState(false);
+	const showAnimate = useDelayUnMount(isSearchActive, 1000);
+	// const [showAnimate,setShowAnimate] = useState(false);
+
+	// useEffect(()=>{
+	// 	let timeId:any
+	// 	if(isSearchActive && !showAnimate){
+	// 		setShowAnimate(true)
+	// 	}else if(!isSearchActive && showAnimate){
+	// 		timeId = setTimeout(()=>{
+	// 			setShowAnimate(false)
+	// 		},1000)
+	// 	}
+	// 	return ()=>clearTimeout(timeId)
+
+	// },[isSearchActive,showAnimate])
 
 	return (
 		<div className="py-3 border-b-2 border-gray-200">
-			<nav className="flex justify-between items-center w-[95%] lg:w-[80%] sm:w-[90%] mx-auto">
-				<div className="flex basis-1/4 flex-row gap-8 items-center ">
-					<Link href="/">
-						<h1 className="text-xl font-semibold text-blue-700">
-							Vendoz
-						</h1>
-					</Link>
-				</div>
-				<div className="flex basis-1/2 ">
+			{!isSearchActive ? (
+				<nav className="flex justify-between items-center w-[95%] h-10 lg:w-[80%] sm:w-[90%] mx-auto">
+					<div className="flex basis-1/4 flex-row gap-8 items-center ">
+						<Link href="/">
+							<h1 className="text-xl font-semibold text-blue-700">
+								Vendoz
+							</h1>
+						</Link>
+					</div>
+					<div className="flex basis-1/2 ">
+						<input
+							onFocus={() => isSetSearchActive(true)}
+							// onBlur={() => isSetSearchActive(false)}
+							type="text"
+							className="w-full h-10 border-2 rounded focus:outline-blue-600 p-3"
+							placeholder="Search..."
+						/>
+					</div>
+					<ul className="flex justify-end basis-1/4 gap-8">
+						<li className="relative">
+							<DropdownMenu />
+						</li>
+						<li className="relative">
+							<button
+								className="relative z-30"
+								onClick={() => setIsOpenUser(!isOpenUser)}
+							>
+								<i
+									className="fa fa-user text-gray-600"
+									aria-hidden="true"
+								></i>
+							</button>
+							<ConditionalWrapper condition={isOpenUser}>
+								<button
+									onClick={() => setIsOpenUser(false)}
+									tabIndex={-1}
+									className="fixed z-10 inset-0  h-full w-full bg-black opacity-50 cursor-default"
+								></button>
+							</ConditionalWrapper>
+							<ConditionalWrapper condition={isOpenUser}>
+								<ul className="absolute z-20 w-36 right-0 bg-slate-100 rounded  shadow-md">
+									<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
+										<Link
+											className="flex p-2"
+											onClick={() => setIsOpenUser(false)}
+											href={"/user/signin"}
+										>
+											Sign In
+										</Link>
+									</li>
+									<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
+										<Link
+											className="flex p-2"
+											onClick={() => setIsOpenUser(false)}
+											href={"/cart/view"}
+										>
+											View Cart
+										</Link>
+									</li>
+									<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
+										<Link
+											className="flex p-2"
+											onClick={() => setIsOpenUser(false)}
+											href={"/cart/wishlist"}
+										>
+											Wishlist
+										</Link>
+									</li>
+								</ul>
+							</ConditionalWrapper>
+						</li>
+					</ul>
+				</nav>
+			) : (
+				<div
+					className={
+						showAnimate
+							? "fixed top-0 z-10 bg-white flex flex-col items-center w-full m-auto animate show"
+							: "fixed top-0 z-10 bg-white flex flex-col items-center w-full m-auto animate"
+					}
+				>
 					<input
+						onBlur={() => isSetSearchActive(false)}
+						autoFocus
 						type="text"
-						className="w-full h-10 border-2 rounded focus:outline-blue-600 p-3"
+						className="w-[70%] h-10 border-2 rounded focus:outline-blue-600 p-3 mt-4"
 						placeholder="Search..."
 					/>
-				</div>
-				<ul className="flex justify-end basis-1/4 gap-8">
-					<li className="relative">
-						<button
-							onClick={() => {
-								setIsOpenCart(!isOpenCart);
-							}}
-						>
-							<i
-								className="fa fa-shopping-basket text-gray-600"
-								aria-hidden="true"
-							></i>
-						</button>
-						<span className=" flex absolute -top-2 left-3  bg-blue-700 text-xs w-4 h-4  rounded-full text-white items-center justify-center">
-							{totalItem}
-						</span>
-						<ConditionalRender condition={isOpenCart}>
-							<button
-								onClick={() => setIsOpenCart(false)}
-								tabIndex={-1}
-								className="fixed z-10 inset-0  h-full w-full bg-black opacity-50 cursor-default"
-							></button>
-						</ConditionalRender>
-						<ConditionalRender condition={isOpenCart}>
-							<div className="flex justify-center items-center absolute w-52 right-0 h-60 z-10 bg-slate-100 text-gray-600">
-								<p>No product in the cart</p>
-							</div>
-						</ConditionalRender>
-					</li>
-					<li className="relative">
-						<button
-							className="relative z-30"
-							onClick={() => setIsOpenUser(!isOpenUser)}
-						>
-							<i
-								className="fa fa-user text-gray-600"
-								aria-hidden="true"
-							></i>
-						</button>
-						<ConditionalRender condition={isOpenUser}>
-							<button
-								onClick={() => setIsOpenUser(false)}
-								tabIndex={-1}
-								className="fixed z-10 inset-0  h-full w-full bg-black opacity-50 cursor-default"
-							></button>
-						</ConditionalRender>
-						<ConditionalRender condition={isOpenUser}>
-							<ul className="absolute z-20 w-36 right-0 bg-slate-100 rounded  shadow-md">
-								<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
-									<Link
-										className="flex p-2"
-										onClick={() => setIsOpenUser(false)}
-										href={"/user/signin"}
-									>
-										Sign In
-									</Link>
-								</li>
-								<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
-									<Link
-										className="flex p-2"
-										onClick={() => setIsOpenUser(false)}
-										href={"/cart/view"}
-									>
-										View Cart
-									</Link>
-								</li>
-								<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
-									<Link
-										className="flex p-2"
-										onClick={() => setIsOpenUser(false)}
-										href={"/cart/wishlist"}
-									>
-										Wishlist
-									</Link>
-								</li>
-							</ul>
-						</ConditionalRender>
-					</li>
-					{/* <li className="relative">
-						<button>
-							<i className="fa fa-bars" aria-hidden="true"></i>
-						</button>
-						<ul className="absolute z-10 w-36 -left-32 bg-slate-100 rounded shadow-md">
-							<li className="p-2 hover:bg-blue-800 hover:text-white text-sm">Language en|fn</li>
-							<li className="p-2 hover:bg-blue-800 hover:text-white text-sm">Register</li>
-							<li className="p-2 hover:bg-blue-800 hover:text-white text-sm">View Cart</li>
-							<li className="p-2 hover:bg-blue-800 hover:text-white text-sm">Wishlist</li>
+					<div className="w-[70%] mt-4">
+						<ul className="flex flex-wrap">
+							<li className="">
+								<div className="">
+									<Image
+										src={"/images/default.jpg"}
+										width={100}
+										height={100}
+										alt="hero"
+									/>
+								</div>
+								<div>
+									<h3>Smug t-shirt</h3>
+								</div>
+							</li>
+							<li className="">
+								<div className="">
+									<Image
+										src={"/images/default.jpg"}
+										width={100}
+										height={100}
+										alt="hero"
+									/>
+								</div>
+								<div>
+									<h3>Smug brown t-shirt</h3>
+								</div>
+							</li>
 						</ul>
-					</li> */}
-				</ul>
-			</nav>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

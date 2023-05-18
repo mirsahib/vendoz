@@ -21,3 +21,13 @@ body {
   background:#fff;
   font-family: 'Comme', sans-serif;
 }
+
+.animate{
+  height: 40px;
+  overflow: hidden;
+  transition: height 0.5s;
+}
+
+.show {
+  height: 170px;
+}
