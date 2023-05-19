@@ -64,7 +64,7 @@ export default function SingleProduct(
 									</div>
 								</div>
 								<div className="flex basis-1/2 justify-end">
-									<button className="bg-blue-700 hover:bg-blue-500 text-white p-1 text-xs lg:text-base sm:text-base font-medium rounded">
+									<button className="bg-blue-700 hover:bg-blue-500 text-white px-4 py-1 text-xs lg:text-base sm:text-base font-medium rounded">
 										ADD TO CART
 									</button>
 								</div>
