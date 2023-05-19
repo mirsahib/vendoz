@@ -6,25 +6,10 @@ import ConditionalWrapper from "../ConditionalWrapper";
 import useDelayUnMount from "@/hooks/useDelayUnMount";
 import Image from "next/image";
 function Header() {
-	const totalItem = useAppSelector((state) => state.cartStore.totalItem);
 	const [isOpenUser, setIsOpenUser] = useState(false);
 	const [isSearchActive, isSetSearchActive] = useState(false);
 	const showAnimate = useDelayUnMount(isSearchActive, 250);
-	// const [showAnimate,setShowAnimate] = useState(false);
-
-	// useEffect(()=>{
-	// 	let timeId:any
-	// 	if(isSearchActive && !showAnimate){
-	// 		setShowAnimate(true)
-	// 	}else if(!isSearchActive && showAnimate){
-	// 		timeId = setTimeout(()=>{
-	// 			setShowAnimate(false)
-	// 		},1000)
-	// 	}
-	// 	return ()=>clearTimeout(timeId)
-
-	// },[isSearchActive,showAnimate])
-
+	
 	return (
 		<>
 			{!isSearchActive ? (
