@@ -1,24 +1,20 @@
-import {ApiResponse} from '@/lib/types'
+import makeApiCall from "@/util/makeApiCall";
+import { ApiErrorResponse, ApiSuccessResponse } from "../types";
 
 const getStaticProps = async () => {
 	try {
-		const res = await fetch(
-			`${process.env.REACT_API_URL}/products?populate=*`,
-			{
-				headers: {
-					Authorization: "Bearer " + process.env.REACT_API_TOKEN,
+		const products = await makeApiCall<ApiSuccessResponse,ApiErrorResponse>('/products?populate=*','GET');
+		if(products && 'error' in products) {
+			return {notFound: true}
+		}else{
+			return {
+				props: {
+					products,
 				},
-			}
-		);
-		const products = await res.json() as ApiResponse;
-        
-		return {
-			props: {
-				products,
-			},
-		};
+			};
+		}
 	} catch (error) {
-        return {notFound: true,error: error}
+        return {notFound: true}
     }
 };
 
