@@ -1,62 +1,57 @@
-import {
-	GetStaticPropsContext,
-	GetStaticPropsResult,
-} from "next";
-import { ApiResponse } from "../types";
-import { ParsedUrlQuery } from "querystring";
-
-interface IParams extends ParsedUrlQuery {
-	productslug: string;
-    catagory: string;
-}
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { ApiErrorResponse, ApiSuccessResponse, ApiResponse,IParams } from "../types";
+import makeApiCall from "@/util/makeApiCall";
 
 const getStaticPaths = async () => {
-	const res = await fetch(
-		`${process.env.REACT_API_URL}/products?populate=*`,
-		{
-			headers: {
-				Authorization: "Bearer " + process.env.REACT_API_TOKEN,
-			},
-		}
+	const products = await makeApiCall<ApiSuccessResponse, ApiErrorResponse>(
+		"/products?populate=*",
+		"GET"
 	);
-	const products = (await res.json()) as ApiResponse;
-	const paths = products.data.map((item) => {
-		const catagory =
-			item.attributes?.catagories?.data[0]?.attributes?.title;
-		return {
-			params: {
-				productslug: item.id.toString(),
-				catagory: catagory,
-			},
-		};
-	});
-
+	let paths: any;
+	if (products && "error" in products) {
+		paths = [];
+	} else {
+		paths = products.data.map((item) => {
+			const catagory =
+				item.attributes?.catagories?.data[0]?.attributes?.title;
+			return {
+				params: {
+					productslug: item.id.toString(),
+					catagory: catagory,
+				},
+			};
+		});
+	}
 	return {
 		paths,
-		fallback: true,
+		fallback: false,
 	};
 };
 
 async function getStaticProps(
 	ctx: GetStaticPropsContext<IParams>
 ): Promise<GetStaticPropsResult<ApiResponse>> {
-	const { productslug, catagory } = ctx.params as IParams;
-	const res = await fetch(
-		`${process.env.REACT_API_URL}/products?populate=*&filters[catagories][title][$eq]=${catagory}`,
-		{
-			headers: {
-				Authorization: "Bearer " + process.env.REACT_API_TOKEN,
-			},
+	const { catagory } = ctx.params as IParams;
+	try {
+		const products = await makeApiCall<
+			ApiSuccessResponse,
+			ApiErrorResponse
+		>(
+			`/products?populate=*&filters[catagories][title][$eq]=${catagory}`,
+			"GET"
+		);
+		if (products && "error" in products) {
+			return { notFound: true };
+		} else {
+			return {
+				props: {
+					...products,
+				},
+			};
 		}
-	);
-	const product = (await res.json()) as ApiResponse;
-
-	//console.log('read by id',product);
-	return {
-		props: {
-			...product
-		},
-	};
+	} catch (error) {
+		return { notFound: true };
+	}
 }
 
 export { getStaticPaths, getStaticProps };

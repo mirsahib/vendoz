@@ -1,66 +1,64 @@
 import {
-	GetStaticProps,
 	GetStaticPropsContext,
 	GetStaticPropsResult,
 } from "next";
-import { ApiResponse, IProduct } from "../types";
-import { ParsedUrlQuery } from "querystring";
-
-interface IParams extends ParsedUrlQuery {
-	productslug: string;
-}
-interface SPApiResponse{
-	data: IProduct
-    meta:ApiResponse['meta']
-}
+import {
+	ApiErrorResponse,
+	ApiResponse,
+	ApiSuccessResponse,
+	IParams
+} from "../types";
+import makeApiCall from "@/util/makeApiCall";
 
 const getStaticPaths = async () => {
-	const res = await fetch(
-		`${process.env.REACT_API_URL}/products?populate=*`,
-		{
-			headers: {
-				Authorization: "Bearer " + process.env.REACT_API_TOKEN,
-			},
-		}
+	const products = await makeApiCall<ApiSuccessResponse, ApiErrorResponse>(
+		"/products?populate=*",
+		"GET"
 	);
-	const products = (await res.json()) as ApiResponse;
-	const paths = products.data.map((item) => {
-		const catagory =
-			item.attributes?.catagories?.data[0]?.attributes?.title;
-		return {
-			params: {
-				productslug: item.id.toString(),
-				catagory: catagory,
-			},
-		};
-	});
+	let paths: any;
+
+	if (products && "error" in products) {
+		paths = [];
+	} else {
+		paths = products.data.map((item) => {
+			const catagory =
+				item.attributes?.catagories?.data[0]?.attributes?.title;
+			return {
+				params: {
+					productslug: item.id.toString(),
+					catagory: catagory,
+				},
+			};
+		});
+	}
 
 	return {
 		paths,
-		fallback: true,
+		fallback: false,
 	};
 };
 
 async function getStaticProps(
 	ctx: GetStaticPropsContext<IParams>
-): Promise<GetStaticPropsResult<SPApiResponse>> {
-	const { productslug, catagory } = ctx.params as IParams;
-	const res = await fetch(
-		`${process.env.REACT_API_URL}/products/${productslug}?populate=*`,
-		{
-			headers: {
-				Authorization: "Bearer " + process.env.REACT_API_TOKEN,
-			},
+): Promise<GetStaticPropsResult<ApiResponse>> {
+	const { productslug } = ctx.params as IParams;
+	try {
+		const product = await makeApiCall<ApiSuccessResponse, ApiErrorResponse>(
+			`/products/${productslug}?populate=*`,
+			"GET"
+		);
+		if (product && "error" in product) {
+			return { notFound: true };
+		} else {
+			return {
+				props: {
+					...product,
+				},
+			};
 		}
-	);
-	const product = (await res.json()) as SPApiResponse;
-
-	//console.log('read by id',product);
-	return {
-		props: {
-			...product
-		},
-	};
+	} catch (error) {
+		return { notFound: true };
+	}
 }
 
 export { getStaticPaths, getStaticProps };
