@@ -17,33 +17,33 @@ export default function Catagory(
 				<title>Vendoz Online Shop</title>
 			</Head>
 			<main>
-				<div className="bg-slate-100 py-1">
-					<div className="lg:w-[76%] sm:w-[90%] m-auto text-slate-600">
-						<Link replace href={`/`}>
-							<span className=" font-semibold">Catagory: </span> /
-						</Link>
+				<section className="flex flex-col">
+					<div className="flex bg-slate-100">
+						<div className="w-[80%] text-slate-600 m-auto ">
+							<Link replace href={`/catagory/${catagory}`}>
+								<span className=" font-semibold">
+									Catagory:{" "}
+								</span>{" "}
+								/{catagory}
+							</Link>
+						</div>
 					</div>
-				</div>
-				{/* nav section */}
-				<section className="flex  lg:w-[75%] sm:w-[95%] m-auto my-8">
-					<ul className="flex flex-wrap">
-						{products.data.map((item) => {
-							return (
-								<li
-									key={item.id}
-									className="flex flex-col basis-full  lg:basis-1/4 sm:basis-1/2"
-								>
-									<Link
-										href={`./${catagory}/product/${item.id}`}
-									>
-										<Card props={item} />
-									</Link>
-								</li>
-							);
-						})}
-					</ul>
+					<div className="w-[80%] flex flex-col m-auto">
+						<div>
+							<ul className="flex flex-wrap">
+								{products.data.map((item,index) => {
+									return (
+										<li key={index} className="flex basis-full lg:basis-1/4 sm:basis-1/2">
+											<Link href={`./${catagory}/product/${item.id}`}>
+												<Card props={item}/>
+											</Link>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					</div>
 				</section>
-				{/* product section */}
 			</main>
 		</>
 	);
