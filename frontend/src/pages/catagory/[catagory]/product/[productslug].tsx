@@ -25,8 +25,7 @@ export default function SingleProduct(
 				<div className="bg-slate-100 py-1">
 					<div className="lg:w-[76%] sm:w-[90%] m-auto text-slate-600">
 						<Link replace href={`/catagory/${catagory}`}>
-							<span className=" font-semibold">Catagory: </span>{" "}
-							/{catagory}
+							<span className=" font-semibold">Catagory: </span>/{catagory}
 						</Link>
 					</div>
 				</div>
@@ -87,8 +86,10 @@ export default function SingleProduct(
 						{desc && (
 							<ReactMarkdown
 								remarkPlugins={[remarkGfm]}
-								children={desc}
-							/>
+								
+							>
+								{desc}
+							</ReactMarkdown>
 						)}
 					</div>
 				</section>
