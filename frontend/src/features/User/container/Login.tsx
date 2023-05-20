@@ -1,6 +1,9 @@
-import Image from "next/image";
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Alert from "../components/Alert";
+import { ApiErrorResponse } from "@/lib/types";
+import { useRouter } from "next/router";
+import errorMessage from "@/util/errorMessage";
 
 interface ILogin {
 	setRedirect: React.Dispatch<SetStateAction<boolean>>;
@@ -18,6 +21,9 @@ export default function Login({ setRedirect }: ILogin) {
 		watch,
 		formState: { errors },
 	} = useForm<ILoginInputs>();
+
+	const [error,setError]= useState<ApiErrorResponse|null>(null)
+	const router = useRouter()
 	const onSubmit: SubmitHandler<ILoginInputs> = async (formData) => {
 		console.log("login", formData);
 		try {
@@ -29,11 +35,19 @@ export default function Login({ setRedirect }: ILogin) {
 				body: JSON.stringify(formData),
 			});
 			const response = await res.json();
-			console.log("login response", response.data);
+			if('error' in response) {
+				console.log("login response",response)
+				setError(response)
+			}else{
+				router.push('/')
+			}
 		} catch (error) {
-			console.log('login component',error)
+			const errorResponse = errorMessage(error)
+			console.log('from login component',errorResponse)
+			setError(errorResponse)
 		}
 	};
+	
 
 	return (
 		<section className="flex justify-center items-center py-8">
@@ -49,6 +63,8 @@ export default function Login({ setRedirect }: ILogin) {
 						or create an account
 					</button>
 				</div>
+
+				{error?<Alert errorObject={error} clearError={setError}/>:''}
 
 				{/* <div className="mb-5">
 					<button className=" w-72 lg:w-80 flex items-center justify-evenly py-2 border border-gray-400">
