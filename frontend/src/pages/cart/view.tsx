@@ -2,7 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { useAppSelector } from "@/store";
 import Product from "@/features/Product";
-export default function cart() {
+export default function Cart() {
 	const cart = useAppSelector((state) => state.cartStore);
 	return (
 		<>

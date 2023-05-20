@@ -1,10 +1,9 @@
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import Head from "next/head";
-
 import React, { useState } from "react";
 
-export default function signin() {
+export default function Signin() {
 	const [redirect, setRedirect] = useState(false);
 
 	return (
