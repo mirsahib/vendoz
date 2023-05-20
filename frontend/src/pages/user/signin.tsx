@@ -1,7 +1,6 @@
-import Login from "@/components/Login";
-import Register from "@/components/Register";
 import Head from "next/head";
 import React, { useState } from "react";
+import User from "@/features/User";
 
 export default function Signin() {
 	const [redirect, setRedirect] = useState(false);
@@ -13,9 +12,9 @@ export default function Signin() {
 			</Head>
 			<main>
 				{redirect ? (
-					<Register setRedirect={setRedirect} />
+					<User.Container.RegisterContainer setRedirect={setRedirect} />
 				) : (
-					<Login setRedirect={setRedirect} />
+					<User.Container.LoginContainer setRedirect={setRedirect} />
 				)}
 			</main>
 		</>
