@@ -1,6 +1,4 @@
-import { IProduct } from "@/types";
-
-export const product: IProduct[] = [
+export const product = [
 	{
 		id: "1",
 		name: "LOCALÉ Men's Premium quality Solid T-shirt - Biege/Camel",
