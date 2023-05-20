@@ -13,4 +13,9 @@ const Component = {
     EmptySection:EmptySection
 }
 
-export default {Container, Component}
+const Product ={
+    Container,
+    Component
+}
+
+export default Product
