@@ -1,5 +1,5 @@
-import Image from "next/image";
-import React, { SetStateAction, useState } from "react";
+'use client'
+import React, { SetStateAction } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { generateUsername } from "unique-username-generator";
 
