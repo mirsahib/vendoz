@@ -1,7 +1,10 @@
-'use client'
-import React, { SetStateAction } from "react";
+import { ApiErrorResponse } from "@/lib/types";
+import errorMessage from "@/util/errorMessage";
+import { useRouter } from "next/router";
+import React, { SetStateAction, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { generateUsername } from "unique-username-generator";
+import Alert from "../components/Alert";
 
 interface IRegisterForm {
 	firstName: string;
@@ -21,6 +24,9 @@ export default function Register({ setRedirect }: IRegister) {
 		watch,
 		formState: { errors },
 	} = useForm<IRegisterForm>();
+	const [error,setError]= useState<ApiErrorResponse|null>(null)
+	const router = useRouter()
+
 	const onSubmit: SubmitHandler<IRegisterForm> = async (data) => {
 		const userName = generateUsername();
 		const formData = { ...data, username: userName };
@@ -35,8 +41,16 @@ export default function Register({ setRedirect }: IRegister) {
 			});
 			const response = await res.json();
 			console.log('reg component',response);
+			if('error' in response) {
+				console.log("login response",response)
+				setError(response)
+			}else{
+				router.push('/')
+			}
 		} catch (error) {
 			console.log("register component", error);
+			const errorResponse = errorMessage(error)
+			setError(errorResponse)
 		}
 	};
 	
@@ -55,7 +69,7 @@ export default function Register({ setRedirect }: IRegister) {
 						or login
 					</button>
 				</div>
-
+				{error?<Alert errorObject={error} clearError={setError}/>:''}
 				<div>
 					<form
 						onSubmit={handleSubmit(onSubmit)}
@@ -70,6 +84,7 @@ export default function Register({ setRedirect }: IRegister) {
 								type="email"
 								placeholder="yoursemail@domain.com"
 								{...(register("email"))}
+								required
 							/>
 						</div>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
@@ -80,6 +95,7 @@ export default function Register({ setRedirect }: IRegister) {
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="text"
 								{...register("firstName")}
+								required
 							/>
 						</div>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
@@ -90,6 +106,7 @@ export default function Register({ setRedirect }: IRegister) {
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="text"
 								{...register("lastName")}
+								required
 							/>
 						</div>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
@@ -100,9 +117,10 @@ export default function Register({ setRedirect }: IRegister) {
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="password"
 								{...register("password")}
+								required
 							/>
 						</div>
-						<div className="w-72 lg:w-80 my-10">
+						<div className="w-72 lg:w-80 mb-5">
 							<p className="text-sm">
 								By selecting "Agree and Sign up" I agree to the
 								<span className="text-blue-600">
