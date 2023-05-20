@@ -13,6 +13,7 @@ const makeApiCall = async <Success, Error, T = void>(
 
 	if (method === "POST" && payload) {
 		options = {
+			method:method,
 			headers: {
 				"Content-Type": "application/json",
 			},
