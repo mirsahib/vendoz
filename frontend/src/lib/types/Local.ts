@@ -4,6 +4,14 @@ interface IParams extends ParsedUrlQuery {
 	productslug: string;
 	catagory: string;
 }
+interface IAuthPayload {
+	identifier?: string;
+	username?: string;
+	email?: string;
+	password: string;
+	firstName?: string;
+	lastName?: string;
+}
 
 interface ApiSuccessResponse {
 	data: IProduct[];
@@ -27,6 +35,29 @@ interface ApiErrorResponse {
 	};
 }
 
+interface AuthSuccessResponse {
+	jwt?: string;
+	user?: {
+		id: number;
+		username: string;
+		email: string;
+		provider?: string;
+		confirmed?: boolean;
+		blocked?: boolean;
+		createdAt: Date;
+		updatedAt: Date;
+	};
+}
+
+type AuthApiResponse = AuthSuccessResponse | ApiErrorResponse;
 type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
 
-export type { ApiSuccessResponse, ApiErrorResponse, ApiResponse,IParams };
+export type {
+	ApiSuccessResponse,
+	ApiErrorResponse,
+	ApiResponse,
+	AuthSuccessResponse,
+	AuthApiResponse,
+	IParams,
+	IAuthPayload,
+};
