@@ -6,9 +6,15 @@ import {
 	ApiErrorResponse,
 	ApiResponse,
 	ApiSuccessResponse,
-	IParams
+	IParams,
+	IProduct
 } from "../types";
 import makeApiCall from "@/util/makeApiCall";
+
+type ApiSuccessResponseByID = {
+	data:IProduct,
+	meta:ApiSuccessResponse['meta']
+}
 
 const getStaticPaths = async () => {
 	const products = await makeApiCall<ApiSuccessResponse, ApiErrorResponse>(
@@ -40,10 +46,10 @@ const getStaticPaths = async () => {
 
 async function getStaticProps(
 	ctx: GetStaticPropsContext<IParams>
-): Promise<GetStaticPropsResult<ApiResponse>> {
+): Promise<GetStaticPropsResult<ApiSuccessResponseByID>> {
 	const { productslug } = ctx.params as IParams;
 	try {
-		const product = await makeApiCall<ApiSuccessResponse, ApiErrorResponse>(
+		const product = await makeApiCall<ApiSuccessResponseByID, ApiErrorResponse>(
 			`/products/${productslug}?populate=*`,
 			"GET"
 		);
