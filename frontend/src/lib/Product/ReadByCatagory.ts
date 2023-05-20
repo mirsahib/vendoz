@@ -30,7 +30,7 @@ const getStaticPaths = async () => {
 
 async function getStaticProps(
 	ctx: GetStaticPropsContext<IParams>
-): Promise<GetStaticPropsResult<ApiResponse>> {
+): Promise<GetStaticPropsResult<ApiSuccessResponse>> {
 	const { catagory } = ctx.params as IParams;
 	try {
 		const products = await makeApiCall<
