@@ -2,6 +2,7 @@ import React, { SetStateAction, useState } from "react";
 import Alert from "../components/Alert";
 import { ApiErrorResponse } from "@/lib/types";
 import useCustomForm from "../hook/useCustomForm";
+import Link from "next/link";
 
 interface ILogin {
 	setRedirect: React.Dispatch<SetStateAction<boolean>>;
@@ -101,6 +102,9 @@ export default function Login({ setRedirect }: ILogin) {
 								minLength={8}
 							/>
 						</div>
+						{/* <div className="flex w-full justify-end mb-5">
+							<Link href={'/'} className="text-blue-600 underline text-sm">Forgot Password?</Link>
+						</div> */}
 						<div className="mb-10">
 							<input
 								type="submit"
