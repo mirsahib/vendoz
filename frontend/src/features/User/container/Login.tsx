@@ -1,9 +1,7 @@
 import React, { SetStateAction, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import Alert from "../components/Alert";
 import { ApiErrorResponse } from "@/lib/types";
-import { useRouter } from "next/router";
-import errorMessage from "@/util/errorMessage";
+import useCustomForm from "../hook/useCustomForm";
 
 interface ILogin {
 	setRedirect: React.Dispatch<SetStateAction<boolean>>;
@@ -15,39 +13,12 @@ interface ILoginInputs {
 }
 
 export default function Login({ setRedirect }: ILogin) {
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm<ILoginInputs>();
-
-	const [error,setError]= useState<ApiErrorResponse|null>(null)
-	const router = useRouter()
-	const onSubmit: SubmitHandler<ILoginInputs> = async (formData) => {
-		console.log("login", formData);
-		try {
-			const res = await fetch("/api/login", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData),
-			});
-			const response = await res.json();
-			if('error' in response) {
-				console.log("login response",response)
-				setError(response)
-			}else{
-				router.push('/')
-			}
-		} catch (error) {
-			const errorResponse = errorMessage(error)
-			console.log('from login component',errorResponse)
-			setError(errorResponse)
-		}
-	};
 	
+	const [error, setError] = useState<ApiErrorResponse | null>(null);
+	const { register, handleSubmit, onSubmit } = useCustomForm<
+		ILoginInputs,
+		ApiErrorResponse
+	>({ url: "/api/login", redirectUrl: "/", setErrorState: setError });
 
 	return (
 		<section className="flex justify-center items-center py-8">
@@ -64,7 +35,11 @@ export default function Login({ setRedirect }: ILogin) {
 					</button>
 				</div>
 
-				{error?<Alert errorObject={error} clearError={setError}/>:''}
+				{error ? (
+					<Alert errorObject={error} clearError={setError} />
+				) : (
+					""
+				)}
 
 				{/* <div className="mb-5">
 					<button className=" w-72 lg:w-80 flex items-center justify-evenly py-2 border border-gray-400">

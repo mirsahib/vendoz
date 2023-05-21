@@ -1,12 +1,11 @@
 import { ApiErrorResponse } from "@/lib/types";
-import errorMessage from "@/util/errorMessage";
-import { useRouter } from "next/router";
 import React, { SetStateAction, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { generateUsername } from "unique-username-generator";
 import Alert from "../components/Alert";
+import useCustomForm from "../hook/useCustomForm";
 
 interface IRegisterForm {
+	username: string;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -18,42 +17,12 @@ interface IRegister {
 }
 
 export default function Register({ setRedirect }: IRegister) {
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm<IRegisterForm>();
-	const [error,setError]= useState<ApiErrorResponse|null>(null)
-	const router = useRouter()
-
-	const onSubmit: SubmitHandler<IRegisterForm> = async (data) => {
-		const userName = generateUsername();
-		const formData = { ...data, username: userName };
-		console.log("register", formData);
-		try {
-			const res = await fetch("/api/register", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData),
-			});
-			const response = await res.json();
-			console.log('reg component',response);
-			if('error' in response) {
-				console.log("login response",response)
-				setError(response)
-			}else{
-				router.push('/')
-			}
-		} catch (error) {
-			console.log("register component", error);
-			const errorResponse = errorMessage(error)
-			setError(errorResponse)
-		}
-	};
-	
+	const [error, setError] = useState<ApiErrorResponse | null>(null);
+	const userName = generateUsername();
+	const { register, handleSubmit, onSubmit } = useCustomForm<
+		IRegisterForm,
+		ApiErrorResponse
+	>({ url: "/api/register", redirectUrl: "/", setErrorState: setError });
 
 	return (
 		<section className="flex justify-center items-center py-8">
@@ -69,7 +38,11 @@ export default function Register({ setRedirect }: IRegister) {
 						or login
 					</button>
 				</div>
-				{error?<Alert errorObject={error} clearError={setError}/>:''}
+				{error ? (
+					<Alert errorObject={error} clearError={setError} />
+				) : (
+					""
+				)}
 				<div>
 					<form
 						onSubmit={handleSubmit(onSubmit)}
@@ -83,10 +56,15 @@ export default function Register({ setRedirect }: IRegister) {
 								className={`h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3`}
 								type="email"
 								placeholder="yoursemail@domain.com"
-								{...(register("email"))}
+								{...register("email")}
 								required
 							/>
 						</div>
+						<input
+							type="hidden"
+							{...register("username")}
+							value={userName}
+						/>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
 							<label htmlFor="firstName" className="text-xs mb-1">
 								First Name
