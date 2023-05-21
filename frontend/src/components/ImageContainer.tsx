@@ -17,6 +17,7 @@ export default function ImageContainer({name,width,height,url}:IImgContainer) {
 				className="hover:scale-110 ease-in duration-500"
 				width={width}
 				height={height}
+				priority={true}
 				alt="men"
 			/>
 
