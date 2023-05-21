@@ -1,3 +1,4 @@
+import Loading from "./components/Loading";
 import Login from "./container/Login";
 import Register from "./container/Register";
 
@@ -6,7 +7,9 @@ const Container = {
     RegisterContainer: Register
 }
 
-const Component = {}
+const Component = {
+    LoadingComponent:Loading
+}
 
 const User = {
     Container: Container,
