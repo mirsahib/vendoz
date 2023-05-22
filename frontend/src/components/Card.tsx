@@ -5,13 +5,16 @@ import { urlBuilder } from "@/util/UrlBuilder";
 import { truncate } from "@/util/truncate";
 import { addItem } from "@/features/Product/action/cartAction";
 import { useAppDispatch } from "@/store";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+
 interface ICard {
 	props: IProduct;
 }
 
 export default function Card({ props }: ICard) {
-	const product  = props.attributes
-	const dispatch = useAppDispatch()
+	const product = props.attributes;
+	const dispatch = useAppDispatch();
 	return (
 		<div className="flex flex-col justify-evenly bg-slate-100 hover:bg-slate-200 relative m-3 pb-5 h-96 hover:shadow-lg">
 			<div className="relative w-[100%] h-[90%] mx-auto overflow-hidden">
@@ -30,7 +33,7 @@ export default function Card({ props }: ICard) {
 						}}
 						className="flex justify-center items-center "
 					>
-						<i className="far fa-heart"></i>
+						<FontAwesomeIcon icon={faHeart} />
 					</button>
 				</div>
 			</div>
@@ -53,7 +56,7 @@ export default function Card({ props }: ICard) {
 						onClick={(e) => {
 							e.preventDefault();
 							e.stopPropagation();
-							dispatch(addItem(props))
+							dispatch(addItem(props));
 						}}
 						className="p-2 bg-blue-700 hover:bg-blue-600 hover:opacity-90 text-white rounded"
 					>

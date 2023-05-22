@@ -2,6 +2,8 @@ import Head from "next/head";
 import React from "react";
 import { useAppSelector } from "@/store";
 import Product from "@/features/Product";
+import {  faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+
 export default function Cart() {
 	const cart = useAppSelector((state) => state.cartStore);
 	return (
@@ -14,7 +16,7 @@ export default function Cart() {
 					{cart.totalItem === 0 ? (
 						<Product.Component.EmptySection
 							title="SHOPPING CART IS EMPTY"
-							icon="fas fa-shopping-bag fa-10x"
+							icon={faShoppingBag}
 							tagline="You have no items in your shopping cart."
 							buttonTitles="CONTINUE SHOPPING"
 						/>

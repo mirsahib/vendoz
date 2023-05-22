@@ -8,6 +8,8 @@ import { urlBuilder } from "@/util/UrlBuilder";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useRouter } from "next/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function SingleProduct(
@@ -52,13 +54,13 @@ export default function SingleProduct(
 								<div className="flex items-center basis-1/2 " >
 									<div className="mr-10">
 										<button className="bg-slate-200 p-4 rounded">
-											<i className="fas fa-minus"></i>
+											<FontAwesomeIcon icon={faMinus}/>
 										</button>
 									</div>
 									<div>1</div>
 									<div className="ml-10">
 										<button className="bg-slate-200 p-4 rounded">
-											<i className="fas fa-plus"></i>
+											<FontAwesomeIcon icon={faPlus}/>
 										</button>
 									</div>
 								</div>

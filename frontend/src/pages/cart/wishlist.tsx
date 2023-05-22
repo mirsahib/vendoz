@@ -1,3 +1,5 @@
+import {faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,7 +50,8 @@ export default function wishlist() {
 														}}
 														className="flex justify-center items-center "
 													>
-														<i className="fa-regular fa-trash-can"></i>
+														<FontAwesomeIcon icon={faTrashCan} />
+
 													</button>
 												</div>
 											</div>

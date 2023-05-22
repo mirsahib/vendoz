@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ConditionalWrapper from "./ConditionalWrapper";
 import { useAppSelector } from "@/store";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 
 export default function DropdownMenu() {
-	const [isOpenCart,setIsOpenCart] = useState(false);
-	const totalItem = useAppSelector(state=>state.cartStore.totalItem)
+	const [isOpenCart, setIsOpenCart] = useState(false);
+	const totalItem = useAppSelector((state) => state.cartStore.totalItem);
 
 	return (
 		<>
@@ -13,10 +15,10 @@ export default function DropdownMenu() {
 					setIsOpenCart(!isOpenCart);
 				}}
 			>
-				<i
-					className="fa fa-shopping-basket text-gray-600"
-					aria-hidden="true"
-				></i>
+				<FontAwesomeIcon
+					icon={faShoppingBasket}
+					className="text-gray-600"
+				/>
 			</button>
 			<span className=" flex absolute -top-2 left-3  bg-blue-700 text-xs w-4 h-4  rounded-full text-white items-center justify-center">
 				{totalItem}

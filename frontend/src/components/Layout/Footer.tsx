@@ -1,4 +1,6 @@
 import React from "react";
+import { paypal, visa, mastercard } from "@/lib/types/Icons";
+import Image from "next/image";
 
 export default function Footer() {
 	return (
@@ -13,14 +15,32 @@ export default function Footer() {
 			</div>
 			<div className="flex justify-end basis-1/2">
 				<ul className="flex items-center">
-					<li className="mx-5" >
-						<i className="fa-lg fab fa-paypal"></i>
+					<li className="mx-5">
+						<Image
+							src={paypal}
+							width={15}
+							height={15}
+							priority
+							alt="paypal"
+						/>
 					</li>
 					<li className="mx-5">
-						<i className="fa-lg fab fa-cc-visa"></i>
+						<Image
+							src={visa}
+							width={15}
+							height={15}
+							priority
+							alt="visa"
+						/>
 					</li>
 					<li className="mx-5">
-						<i className="fa-lg fab fa-cc-mastercard"></i>
+						<Image
+							src={mastercard}
+							width={15}
+							height={15}
+							priority
+							alt="mastercard"
+						/>
 					</li>
 				</ul>
 			</div>

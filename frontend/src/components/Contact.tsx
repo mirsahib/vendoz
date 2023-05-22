@@ -1,5 +1,6 @@
 import React from "react";
-
+import { twitter, facebook, instagram, pinterest } from "@/lib/types/Icons";
+import Image from "next/image";
 export default function Contact() {
 	return (
 		<section className="bg-blue-600 py-2 lg:block sm:hidden  hidden">
@@ -20,28 +21,36 @@ export default function Contact() {
 				<div className="flex justify-end basis-1/4">
 					<ul className="flex items-center">
 						<li className="mx-5 text-white">
-							<i
-								className="fab fa-facebook"
-								aria-hidden="true"
-							></i>
+							<Image
+								src={facebook}
+								width={15}
+								height={15}
+								alt="facebook"
+							/>
 						</li>
 						<li className="mx-5 text-white">
-							<i
-								className="fab fa-twitter"
-								aria-hidden="true"
-							></i>
+							<Image
+								src={twitter}
+								width={15}
+								height={15}
+								alt="twitter"
+							/>
 						</li>
 						<li className="mx-5 text-white">
-							<i
-								className="fab fa-instagram"
-								aria-hidden="true"
-							></i>
+							<Image
+								src={instagram}
+								width={15}
+								height={15}
+								alt="instagram"
+							/>
 						</li>
 						<li className="mx-5 text-white">
-							<i
-								className="fab fa-pinterest"
-								aria-hidden="true"
-							></i>
+							<Image
+								src={pinterest}
+								width={15}
+								height={15}
+								alt="pinterest"
+							/>
 						</li>
 					</ul>
 				</div>

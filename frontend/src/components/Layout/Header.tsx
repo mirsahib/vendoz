@@ -5,6 +5,8 @@ import DropdownMenu from "../DropdownMenu";
 import ConditionalWrapper from "../ConditionalWrapper";
 import useDelayUnMount from "@/hooks/useDelayUnMount";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 function Header() {
 	const [isOpenUser, setIsOpenUser] = useState(false);
 	const [isSearchActive, isSetSearchActive] = useState(false);
@@ -40,10 +42,8 @@ function Header() {
 									className="relative z-30"
 									onClick={() => setIsOpenUser(!isOpenUser)}
 								>
-									<i
-										className="fa fa-user text-gray-600"
-										aria-hidden="true"
-									></i>
+								
+									<FontAwesomeIcon icon={faUser} className="text-gray-600"/>
 								</button>
 								<ConditionalWrapper condition={isOpenUser}>
 									<button

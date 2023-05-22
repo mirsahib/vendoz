@@ -1,4 +1,6 @@
 import { ApiErrorResponse } from "@/lib/types";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { SetStateAction } from "react";
 
 interface IAlert{
@@ -15,7 +17,7 @@ export default function Alert({errorObject,clearError}: IAlert) {
 				{message}
 			</p>
 			<button onClick={()=>clearError(null)}>
-				<i className="fas fa-times"></i>
+				<FontAwesomeIcon icon={faTimes}/>
 			</button>
 		</div>
 	);

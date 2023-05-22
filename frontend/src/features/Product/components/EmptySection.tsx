@@ -1,9 +1,11 @@
+import { IconDefinition, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React from "react";
 
 interface IEmptySection{
 	title:string,
-	icon:string
+	icon:IconDefinition
 	tagline:string
 	buttonTitles:string
 }
@@ -17,7 +19,8 @@ export default function EmptySection({title,icon,tagline,buttonTitles}:IEmptySec
 				</h1>
 			</div>
 			<div className="flex flex-col items-center text-center">
-				<i className={`${icon} text-gray-400`}></i>
+				{/* <i className={`${icon} text-gray-400`}></i> */}
+				<FontAwesomeIcon icon={icon} className="text-gray-400" size={"8x"}/>
 				<p className="mb-6 mt-2 text-gray-400 ">
 					{tagline}
 				</p>

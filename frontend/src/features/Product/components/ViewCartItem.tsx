@@ -5,6 +5,9 @@ import { urlBuilder } from "@/util/UrlBuilder";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function ViewCartItem({
 	products,
@@ -49,11 +52,11 @@ export default function ViewCartItem({
 					</div>
 					<div className="flex flex-row items-center my-4 lg:my-0 sm:my-0">
 						<button onClick={()=>dispatch(decreaseItem(products.product))} className="p-1 bg-slate-200 hover:bg-slate-300 rounded mr-3">
-							<i className="fas fa-minus"></i>
+							<FontAwesomeIcon icon={faMinus}/>
 						</button>
 						<p>{products.count}</p>
 						<button onClick={()=>dispatch(increaseItem(products.product))} className="p-1 bg-slate-200 hover:bg-slate-300 rounded ml-3">
-							<i className="far fa-plus"></i>
+							<FontAwesomeIcon icon={faPlus}/>
 						</button>
 					</div>
 					<div>
@@ -67,7 +70,7 @@ export default function ViewCartItem({
 
 				<div className="flex justify-end basis-[10%]">
 					<button onClick={()=>dispatch(removeItem(products.product))} className="text-blue-600 hover:text-red-600">
-						<i className="far fa-trash-alt"></i>
+						<FontAwesomeIcon icon={faTrash}/>
 					</button>
 				</div>
 			</div>

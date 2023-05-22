@@ -1,6 +1,8 @@
 import { useAppSelector } from "@/store";
 import React from "react";
 import ViewCartItem from "../components/ViewCartItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function ViewCart() {
     const cart = useAppSelector((state) => state.cartStore);
@@ -28,13 +30,13 @@ export default function ViewCart() {
 			<div className="w-full flex flex-row justify-between mb-5">
 				<div>
 					<button className="text-blue-600 hover:text-black">
-						<i className="fas fa-arrow-left mr-2"></i>{" "}
+						<FontAwesomeIcon icon={faArrowLeft} className="mr-2"/>
 						<span>Continue Shopping</span>
 					</button>
 				</div>
 				<div>
 					<button className="text-blue-600 hover:text-black">
-						<i className="far fa-trash-alt mr-2"></i>
+						<FontAwesomeIcon icon={faTrash} className="mr-2"/>
 						<span>Clear Shopping Cart</span>
 					</button>
 				</div>
