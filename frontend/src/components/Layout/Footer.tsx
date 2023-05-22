@@ -1,6 +1,10 @@
 import React from "react";
-import { paypal, visa, mastercard } from "@/lib/types/Icons";
-import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faPaypal,
+	faCcVisa,
+	faCcMastercard,
+} from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
 	return (
@@ -16,31 +20,13 @@ export default function Footer() {
 			<div className="flex justify-end basis-1/2">
 				<ul className="flex items-center">
 					<li className="mx-5">
-						<Image
-							src={paypal}
-							width={15}
-							height={15}
-							priority
-							alt="paypal"
-						/>
+						<FontAwesomeIcon icon={faPaypal} />
 					</li>
 					<li className="mx-5">
-						<Image
-							src={visa}
-							width={15}
-							height={15}
-							priority
-							alt="visa"
-						/>
+						<FontAwesomeIcon icon={faCcVisa} />
 					</li>
 					<li className="mx-5">
-						<Image
-							src={mastercard}
-							width={15}
-							height={15}
-							priority
-							alt="mastercard"
-						/>
+						<FontAwesomeIcon icon={faCcMastercard} />
 					</li>
 				</ul>
 			</div>

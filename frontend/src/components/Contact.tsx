@@ -1,6 +1,12 @@
 import React from "react";
-import { twitter, facebook, instagram, pinterest } from "@/lib/types/Icons";
-import Image from "next/image";
+import {
+	faTwitter,
+	faFacebook,
+	faInstagram,
+	faPinterest,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function Contact() {
 	return (
 		<section className="bg-blue-600 py-2 lg:block sm:hidden  hidden">
@@ -21,36 +27,16 @@ export default function Contact() {
 				<div className="flex justify-end basis-1/4">
 					<ul className="flex items-center">
 						<li className="mx-5 text-white">
-							<Image
-								src={facebook}
-								width={15}
-								height={15}
-								alt="facebook"
-							/>
+							<FontAwesomeIcon icon={faFacebook} />
 						</li>
 						<li className="mx-5 text-white">
-							<Image
-								src={twitter}
-								width={15}
-								height={15}
-								alt="twitter"
-							/>
+							<FontAwesomeIcon icon={faTwitter} />
 						</li>
 						<li className="mx-5 text-white">
-							<Image
-								src={instagram}
-								width={15}
-								height={15}
-								alt="instagram"
-							/>
+							<FontAwesomeIcon icon={faInstagram} />
 						</li>
 						<li className="mx-5 text-white">
-							<Image
-								src={pinterest}
-								width={15}
-								height={15}
-								alt="pinterest"
-							/>
+							<FontAwesomeIcon icon={faPinterest} />
 						</li>
 					</ul>
 				</div>
