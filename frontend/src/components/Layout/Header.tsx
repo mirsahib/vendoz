@@ -1,16 +1,18 @@
 import { useAppSelector } from "@/store";
 import Link from "next/link";
-import React, { ReactNode, useEffect, useState } from "react";
-import DropdownMenu from "../DropdownMenu";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
+import CartMenu from "../CartMenu";
 import ConditionalWrapper from "../ConditionalWrapper";
 import useDelayUnMount from "@/hooks/useDelayUnMount";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import UserMenu from "../UserMenu";
+import { AuthContext } from "@/context/AuthContext";
 function Header() {
-	const [isOpenUser, setIsOpenUser] = useState(false);
 	const [isSearchActive, isSetSearchActive] = useState(false);
 	const showAnimate = useDelayUnMount(isSearchActive, 250);
+	const {user} = useContext(AuthContext)
 	
 	return (
 		<>
@@ -35,60 +37,10 @@ function Header() {
 						</div>
 						<ul className="flex justify-end basis-1/4 gap-8">
 							<li className="relative">
-								<DropdownMenu />
+								<CartMenu />
 							</li>
 							<li className="relative">
-								<button
-									className="relative z-30"
-									onClick={() => setIsOpenUser(!isOpenUser)}
-								>
-								
-									<FontAwesomeIcon icon={faUser} className="text-gray-600"/>
-								</button>
-								<ConditionalWrapper condition={isOpenUser}>
-									<button
-										onClick={() => setIsOpenUser(false)}
-										tabIndex={-1}
-										className="fixed z-10 inset-0  h-full w-full bg-black opacity-50 cursor-default"
-									></button>
-								</ConditionalWrapper>
-								<ConditionalWrapper condition={isOpenUser}>
-									<ul className="absolute z-20 w-36 right-0 bg-slate-100 rounded  shadow-md">
-										<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
-											<Link
-												className="flex p-2"
-												onClick={() =>
-													setIsOpenUser(false)
-												}
-												href={"/user/signin"}
-											>
-												Sign In
-											</Link>
-										</li>
-										<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
-											<Link
-												className="flex p-2"
-												onClick={() =>
-													setIsOpenUser(false)
-												}
-												href={"/cart/view"}
-											>
-												View Cart
-											</Link>
-										</li>
-										<li className=" hover:bg-blue-800 hover:text-white text-sm rounded">
-											<Link
-												className="flex p-2"
-												onClick={() =>
-													setIsOpenUser(false)
-												}
-												href={"/cart/wishlist"}
-											>
-												Wishlist
-											</Link>
-										</li>
-									</ul>
-								</ConditionalWrapper>
+								{user?<Link href={'/user/me'} className="text-black">My Account</Link>:<UserMenu/>}
 							</li>
 						</ul>
 					</nav>

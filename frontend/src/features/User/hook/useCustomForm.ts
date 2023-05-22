@@ -1,6 +1,7 @@
+import { AuthContext } from "@/context/AuthContext";
 import errorMessage from "@/util/errorMessage";
 import { useRouter } from "next/router";
-import { SetStateAction } from "react";
+import { SetStateAction, useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface IUseCustomForm<ErrorResponse> {
@@ -16,6 +17,7 @@ const useCustomForm = <T extends Record<string, any>, ErrorResponse>({
 }: IUseCustomForm<ErrorResponse>) => {
 	
     const router = useRouter()
+	const {saveUser} = useContext(AuthContext)
     const {
 		register,
 		handleSubmit,
@@ -37,6 +39,7 @@ const useCustomForm = <T extends Record<string, any>, ErrorResponse>({
 			if ("error" in response) {
 				setErrorState(response);
 			} else {
+				saveUser(response)
 				router.push(redirectUrl);
 			}
 		} catch (error) {
