@@ -12,7 +12,8 @@ export default function Me() {
 		if (!user) {
 			router.push("/");
 		}
-	}, []);
+	}, [router,user]);
+	
 	return (
 		<>
 			<Head>
