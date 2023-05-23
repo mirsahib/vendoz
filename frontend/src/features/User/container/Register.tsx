@@ -1,10 +1,19 @@
 import { ApiErrorResponse } from "@/lib/types";
-import React, { SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { generateUsername } from "unique-username-generator";
 import Alert from "../components/Alert";
-import useCustomForm from "../hook/useCustomForm";
+import { WithForm } from "../HOC/withForm";
+import {
+	FormState,
+	SubmitHandler,
+	UseFormHandleSubmit,
+	UseFormRegister,
+} from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import dynamic from "next/dynamic";
 
-interface IRegisterForm {
+interface IRegisterInputs {
 	username: string;
 	firstName: string;
 	lastName: string;
@@ -13,17 +22,27 @@ interface IRegisterForm {
 }
 
 interface IRegister {
-	setRedirect: React.Dispatch<SetStateAction<boolean>>;
+	register: UseFormRegister<IRegisterInputs>;
+	handleSubmit: UseFormHandleSubmit<IRegisterInputs>;
+	onSubmit: SubmitHandler<IRegisterInputs>;
+	formState: FormState<IRegisterInputs>;
+	error: ApiErrorResponse | null;
+	setError: Dispatch<SetStateAction<ApiErrorResponse | null>>;
+	setRedirect: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Register({ setRedirect }: IRegister) {
-	const [error, setError] = useState<ApiErrorResponse | null>(null);
-	const userName = generateUsername();
-	const { register, handleSubmit, onSubmit } = useCustomForm<
-		IRegisterForm,
-		ApiErrorResponse
-	>({ url: "/api/register", redirectUrl: "/", setErrorState: setError });
 
+function Register({
+	register,
+	handleSubmit,
+	onSubmit,
+	formState,
+	error,
+	setError,
+	setRedirect,
+}: IRegister) {
+	const userName = generateUsername();
+	
 	return (
 		<section className="flex justify-center items-center py-8">
 			<div className="flex flex-col items-center w-[24em] lg:w-[30em] sm:w-[22em]">
@@ -53,11 +72,13 @@ export default function Register({ setRedirect }: IRegister) {
 								Email
 							</label>
 							<input
+								id="email"
 								className={`h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3`}
 								type="email"
 								placeholder="yoursemail@domain.com"
 								{...register("email")}
 								required
+								autoComplete="on"
 							/>
 						</div>
 						<input
@@ -70,6 +91,7 @@ export default function Register({ setRedirect }: IRegister) {
 								First Name
 							</label>
 							<input
+								id="firstName"
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="text"
 								{...register("firstName")}
@@ -81,6 +103,7 @@ export default function Register({ setRedirect }: IRegister) {
 								Last Name
 							</label>
 							<input
+								id="lastName"
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="text"
 								{...register("lastName")}
@@ -88,10 +111,11 @@ export default function Register({ setRedirect }: IRegister) {
 							/>
 						</div>
 						<div className="w-72 lg:w-80 flex flex-col mb-5">
-							<label htmlFor="firstName" className="text-xs mb-1">
+							<label htmlFor="password" className="text-xs mb-1">
 								Password
 							</label>
 							<input
+								id="password"
 								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="password"
 								{...register("password")}
@@ -111,7 +135,15 @@ export default function Register({ setRedirect }: IRegister) {
 						</div>
 						<div className="mb-10">
 							<button className="w-72 lg:w-80 h-12 bg-blue-600 text-white font-semibold">
-								Agree and Sign Up
+								<span className="mr-1">Agree and Sign Up</span>
+								{formState?.isSubmitting ? (
+									<FontAwesomeIcon
+										icon={faCircleNotch}
+										spin
+									/>
+								) : (
+									""
+								)}
 							</button>
 						</div>
 					</form>
@@ -121,3 +153,11 @@ export default function Register({ setRedirect }: IRegister) {
 		</section>
 	);
 }
+
+const RegisterWithForm = WithForm<IRegister, IRegisterInputs>({
+	Component: Register,
+	url: "/api/register",
+	redirectUrl: "/",
+});
+
+export default RegisterWithForm;

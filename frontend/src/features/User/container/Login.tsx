@@ -1,11 +1,23 @@
-import React, { SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Alert from "../components/Alert";
 import { ApiErrorResponse } from "@/lib/types";
-import useCustomForm from "../hook/useCustomForm";
-import Link from "next/link";
-
+import { WithForm } from "../HOC/withForm";
+import {
+	FormState,
+	SubmitHandler,
+	UseFormHandleSubmit,
+	UseFormRegister,
+} from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 interface ILogin {
-	setRedirect: React.Dispatch<SetStateAction<boolean>>;
+	register: UseFormRegister<ILoginInputs>;
+	handleSubmit: UseFormHandleSubmit<ILoginInputs>;
+	onSubmit: SubmitHandler<ILoginInputs>;
+	formState:FormState<ILoginInputs>
+	error: ApiErrorResponse | null;
+	setError: Dispatch<SetStateAction<ApiErrorResponse | null>>;
+	setRedirect: Dispatch<SetStateAction<boolean>>;
 }
 
 interface ILoginInputs {
@@ -13,13 +25,16 @@ interface ILoginInputs {
 	password: string;
 }
 
-export default function Login({ setRedirect }: ILogin) {
-	
-	const [error, setError] = useState<ApiErrorResponse | null>(null);
-	const { register, handleSubmit, onSubmit } = useCustomForm<
-		ILoginInputs,
-		ApiErrorResponse
-	>({ url: "/api/login", redirectUrl: "/", setErrorState: setError });
+function Login({
+	register,
+	handleSubmit,
+	onSubmit,
+	formState,
+	setRedirect,
+	error,
+	setError,
+}: ILogin) {
+	console.log("🚀 ~ file: Login.tsx:37 ~ formState:", formState)
 
 	return (
 		<section className="flex justify-center items-center py-8">
@@ -75,6 +90,7 @@ export default function Login({ setRedirect }: ILogin) {
 
 				<div>
 					<form
+
 						onSubmit={handleSubmit(onSubmit)}
 						className="flex flex-col items-center"
 					>
@@ -83,10 +99,12 @@ export default function Login({ setRedirect }: ILogin) {
 								Email
 							</label>
 							<input
+								id="email"
 								className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="email"
 								placeholder="yoursemail@domain.com"
 								{...register("email")}
+								autoComplete="on"
 								required
 							/>
 						</div>
@@ -95,10 +113,12 @@ export default function Login({ setRedirect }: ILogin) {
 								Password
 							</label>
 							<input
+								id="password"
 								className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 								type="password"
 								{...register("password")}
 								required
+								autoComplete="on"
 								minLength={8}
 							/>
 						</div>
@@ -106,11 +126,10 @@ export default function Login({ setRedirect }: ILogin) {
 							<Link href={'/'} className="text-blue-600 underline text-sm">Forgot Password?</Link>
 						</div> */}
 						<div className="mb-10">
-							<input
-								type="submit"
-								value={"Login"}
-								className="w-72 lg:w-80 h-12 bg-blue-600 hover:bg-blue-500 text-white font-semibold cursor-pointer"
-							/>
+							<button className="w-72 lg:w-80 h-12 bg-blue-600 hover:bg-blue-500 text-white font-semibold ">
+								<span>Login </span>
+								{formState?.isSubmitting?<FontAwesomeIcon icon={faCircleNotch} spin/>:''}
+							</button>
 						</div>
 					</form>
 				</div>
@@ -119,3 +138,11 @@ export default function Login({ setRedirect }: ILogin) {
 		</section>
 	);
 }
+
+const LoginWithForm = WithForm<ILogin, ILoginInputs>({
+	Component: Login,
+	url: "/api/login",
+	redirectUrl: "/",
+});
+
+export default LoginWithForm;

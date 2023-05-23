@@ -22,7 +22,7 @@ const useCustomForm = <T extends Record<string, any>, ErrorResponse>({
 		register,
 		handleSubmit,
 		watch,
-		formState: { errors },
+		formState,
 	} = useForm<T>();
 
 
@@ -52,6 +52,7 @@ const useCustomForm = <T extends Record<string, any>, ErrorResponse>({
 		handleSubmit,
 		register,
 		onSubmit,
+		formState
 	};
 };
 
