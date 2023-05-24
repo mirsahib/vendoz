@@ -27,6 +27,7 @@ const useCustomForm = <T extends Record<string, any>, ErrorResponse>({
 
 
 	const onSubmit: SubmitHandler<T> = async (data) => {
+		console.log("🚀 ~ file: useCustomForm.ts:30 ~ constonSubmit:SubmitHandler<T>= ~ data:", data)
 		try {
 			const res = await fetch(url, {
 				method: "POST",
