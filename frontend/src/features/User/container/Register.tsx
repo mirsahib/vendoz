@@ -1,6 +1,5 @@
 import { ApiErrorResponse } from "@/lib/types";
 import React, { Dispatch, SetStateAction } from "react";
-import { generateUsername } from "unique-username-generator";
 import Alert from "../components/Alert";
 import { WithForm } from "../HOC/withForm";
 import {
@@ -11,7 +10,7 @@ import {
 } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import dynamic from "next/dynamic";
+import {v4 as uuid4} from 'uuid'
 
 interface IRegisterInputs {
 	username: string;
@@ -41,7 +40,7 @@ function Register({
 	setError,
 	setRedirect,
 }: IRegister) {
-	const userName = generateUsername();
+	const userName = uuid4();
 	
 	return (
 		<section className="flex justify-center items-center py-8">
