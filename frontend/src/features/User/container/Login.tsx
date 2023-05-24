@@ -10,11 +10,12 @@ import {
 } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import FormInput from "../components/FormInput";
 interface ILogin {
 	register: UseFormRegister<ILoginInputs>;
 	handleSubmit: UseFormHandleSubmit<ILoginInputs>;
 	onSubmit: SubmitHandler<ILoginInputs>;
-	formState:FormState<ILoginInputs>
+	formState: FormState<ILoginInputs>;
 	error: ApiErrorResponse | null;
 	setError: Dispatch<SetStateAction<ApiErrorResponse | null>>;
 	setRedirect: Dispatch<SetStateAction<boolean>>;
@@ -34,7 +35,7 @@ function Login({
 	error,
 	setError,
 }: ILogin) {
-	console.log("🚀 ~ file: Login.tsx:37 ~ formState:", formState)
+	// console.log("🚀 ~ file: Login.tsx:37 ~ formState:", formState);
 
 	return (
 		<section className="flex justify-center items-center py-8">
@@ -56,79 +57,50 @@ function Login({
 				) : (
 					""
 				)}
-
-				{/* <div className="mb-5">
-					<button className=" w-72 lg:w-80 flex items-center justify-evenly py-2 border border-gray-400">
-						<Image
-							src={"/icon/google.svg"}
-							width={24}
-							height={24}
-							alt="google"
-						/>
-						<span className="text-sm">Continue with Google</span>
-					</button>
-				</div> */}
-				{/* google login */}
-				{/* <div className="mb-5">
-					<button className="w-72 lg:w-80 flex items-center justify-evenly py-2 border border-gray-400">
-						<Image
-							src={"/icon/apple.svg"}
-							width={24}
-							height={24}
-							alt="apple"
-						/>
-						<span className="text-sm">Continue with Google</span>
-					</button>
-				</div> */}
-				{/* apple login */}
-
-				{/* <div className="flex flex-row items-center mb-5">
-					<div className="w-24 border-t border-gray-400 flex"></div>
-					<span className="mx-4">or</span>
-					<div className="w-24 border-t border-gray-400 flex"></div>{" "}
-				</div> */}
-
+				{/* import brand button here */}
+				{/* import divider here */}
 				<div>
 					<form
-
 						onSubmit={handleSubmit(onSubmit)}
 						className="flex flex-col items-center"
 					>
-						<div className="w-72 lg:w-80 flex flex-col mb-5">
-							<label htmlFor="email" className="text-xs mb-1">
-								Email
-							</label>
-							<input
-								id="email"
-								className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
-								type="email"
-								placeholder="yoursemail@domain.com"
-								{...register("email")}
-								autoComplete="on"
-								required
-							/>
-						</div>
-						<div className="w-72 lg:w-80 flex flex-col mb-5">
-							<label htmlFor="email" className="text-xs mb-1">
-								Password
-							</label>
-							<input
-								id="password"
-								className="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
-								type="password"
-								{...register("password")}
-								required
-								autoComplete="on"
-								minLength={8}
-							/>
-						</div>
-						{/* <div className="flex w-full justify-end mb-5">
-							<Link href={'/'} className="text-blue-600 underline text-sm">Forgot Password?</Link>
-						</div> */}
+						<FormInput
+							id="email"
+							labelname="email"
+							label="Email"
+							labelclassname="text-xs mb-1"
+							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
+							type="email"
+							inputclassname="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+							autoComplete="on"
+							placeholder="yoursemail@domain.com"
+							{...register("email", { required: true })}
+						/>
+						<FormInput
+							id="password"
+							labelname="password"
+							label="Password"
+							labelclassname="text-xs mb-1"
+							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
+							type="password"
+							inputclassname="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+							{...register("password", {
+								required: true,
+								minLength: 8,
+							})}
+						/>
+						{/* import forgot password  */}
 						<div className="mb-10">
 							<button className="w-72 lg:w-80 h-12 bg-blue-600 hover:bg-blue-500 text-white font-semibold ">
 								<span>Login </span>
-								{formState?.isSubmitting?<FontAwesomeIcon icon={faCircleNotch} spin/>:''}
+								{formState?.isSubmitting ? (
+									<FontAwesomeIcon
+										icon={faCircleNotch}
+										spin
+									/>
+								) : (
+									""
+								)}
 							</button>
 						</div>
 					</form>

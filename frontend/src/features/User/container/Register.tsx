@@ -11,6 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import {v4 as uuid4} from 'uuid'
+import FormInput from "../components/FormInput";
 
 interface IRegisterInputs {
 	username: string;
@@ -66,61 +67,53 @@ function Register({
 						onSubmit={handleSubmit(onSubmit)}
 						className="flex flex-col items-center"
 					>
-						<div className="w-72 lg:w-80 flex flex-col mb-5">
-							<label htmlFor="email" className="text-xs mb-1">
-								Email
-							</label>
-							<input
-								id="email"
-								className={`h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3`}
-								type="email"
-								placeholder="yoursemail@domain.com"
-								{...register("email")}
-								required
-								autoComplete="on"
-							/>
-						</div>
+						<FormInput
+							id="email"
+							labelname="email"
+							label="Email"
+							labelclassname="text-xs mb-1"
+							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
+							type="email"
+							inputclassname="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+							autoComplete="on"
+							placeholder="yoursemail@domain.com"
+							{...register("email", { required: true })}
+						/>
 						<input
 							type="hidden"
 							{...register("username")}
 							value={userName}
 						/>
-						<div className="w-72 lg:w-80 flex flex-col mb-5">
-							<label htmlFor="firstName" className="text-xs mb-1">
-								First Name
-							</label>
-							<input
-								id="firstName"
-								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
-								type="text"
-								{...register("firstName")}
-								required
-							/>
-						</div>
-						<div className="w-72 lg:w-80 flex flex-col mb-5">
-							<label htmlFor="lastName" className="text-xs mb-1">
-								Last Name
-							</label>
-							<input
-								id="lastName"
-								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
-								type="text"
-								{...register("lastName")}
-								required
-							/>
-						</div>
-						<div className="w-72 lg:w-80 flex flex-col mb-5">
-							<label htmlFor="password" className="text-xs mb-1">
-								Password
-							</label>
-							<input
-								id="password"
-								className="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
-								type="password"
-								{...register("password")}
-								required
-							/>
-						</div>
+						<FormInput
+							id="firstName"
+							labelname="firstName"
+							label="First Name"
+							labelclassname="text-xs mb-1"
+							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
+							type="text"
+							inputclassname="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+							{...register("firstName", { required: true })}
+						/>
+						<FormInput
+							id="lastName"
+							labelname="lastName"
+							label="Last Name"
+							labelclassname="text-xs mb-1"
+							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
+							type="text"
+							inputclassname="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+							{...register("lastName", { required: true })}
+						/>
+						<FormInput
+							id="password"
+							labelname="password"
+							label="Password"
+							labelclassname="text-xs mb-1"
+							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
+							type="password"
+							inputclassname="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
+							{...register("password", { required: true })}
+						/>
 						<div className="w-72 lg:w-80 mb-5">
 							<p className="text-sm">
 								By selecting "Agree and Sign up" I agree to the
