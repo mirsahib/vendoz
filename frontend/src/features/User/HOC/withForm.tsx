@@ -15,7 +15,7 @@ export function WithForm<T, FormInputTypes extends Record<string, any>>({
 }: IWithForm<T>) {
     // do not need to pass below props from the invoked component
     type Props = Omit<T,'error'|'setError'|'register'|'handleSubmit'|'onSubmit'|'formState' >
-    return (hocProps: Props) => {
+    return function WithProps(hocProps: Props){
 		const [error, setError] = useState<ApiErrorResponse | null>(null);
 		const { register, handleSubmit, onSubmit,formState } = useCustomForm<
 			FormInputTypes,
