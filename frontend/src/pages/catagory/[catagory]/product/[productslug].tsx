@@ -5,12 +5,12 @@ import React from "react";
 import { InferGetStaticPropsType } from "next";
 import { getStaticProps } from "@/lib/Product/ReadById";
 import { urlBuilder } from "@/util/UrlBuilder";
-import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-
+import dynamic from "next/dynamic";
+const Markdown = dynamic<any>(() => import('react-markdown').then(mod=>mod.default));
 
 export default function SingleProduct(
 	product: InferGetStaticPropsType<typeof getStaticProps>
@@ -86,12 +86,12 @@ export default function SingleProduct(
 					</div>
 					<div className="mx-5">
 						{desc && (
-							<ReactMarkdown
+							<Markdown
 								remarkPlugins={[remarkGfm]}
 								
 							>
 								{desc}
-							</ReactMarkdown>
+							</Markdown>
 						)}
 					</div>
 				</section>
