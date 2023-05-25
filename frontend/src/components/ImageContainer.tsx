@@ -11,7 +11,7 @@ interface IImgContainer{
 
 export default function ImageContainer({name,width,height,url}:IImgContainer) {
 	return (
-		<div className="relative m-3 overflow-hidden">
+		<div className="relative z-[-2] m-3 overflow-hidden">
 			<Image
 				src={url}
 				className="hover:scale-110 ease-in duration-500"
