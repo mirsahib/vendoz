@@ -4,6 +4,8 @@ import Catagory from "@/components/Catagory";
 import { getStaticProps } from "@/lib/Product/ReadAll";
 import { InferGetStaticPropsType } from "next";
 import Product from "@/features/Product";
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home({products}:InferGetStaticPropsType<typeof getStaticProps>) {
 
@@ -18,6 +20,7 @@ export default function Home({products}:InferGetStaticPropsType<typeof getStatic
 				<Catagory/>
 				{/* catagory section */}
 				<Product.Container.ProductSection products={products?.data}/>
+				<ToastContainer/>
 				{/* <Product/>
 				<Product/> */}
 				{/* product section */}
