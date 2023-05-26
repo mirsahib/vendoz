@@ -1,5 +1,5 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
-import { ApiErrorResponse, ApiSuccessResponse, ApiResponse,IParams } from "../types";
+import { ApiErrorResponse, ApiSuccessResponse,IParams } from "../types";
 import makeApiCall from "@/util/makeApiCall";
 
 const getStaticPaths = async () => {
@@ -12,8 +12,7 @@ const getStaticPaths = async () => {
 		paths = [];
 	} else {
 		paths = products.data.map((item) => {
-			const catagory =
-				item.attributes?.catagories?.data[0]?.attributes?.title;
+			const catagory=item.attributes?.catagories?.data[0]?.attributes?.title;
 			return {
 				params: {
 					productslug: item.id.toString(),
