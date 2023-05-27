@@ -17,6 +17,7 @@ import {
 } from "@/features/Product/action/cartAction";
 import { toast } from "react-toastify";
 import { addItem } from "@/features/Product/action/cartAction";
+import useProductInCart from "@/features/Product/hooks/useProductInCart";
 const Markdown = dynamic<any>(() =>
 	import("react-markdown").then((mod) => mod.default)
 );
@@ -27,18 +28,10 @@ export default function SingleProduct(
 	const router = useRouter();
 	const { catagory } = router.query;
 	const { title, desc, price, img, img2 } = product.data?.attributes;
-	const cartItem = useAppSelector((state) => state.cartStore.itemList);
-	const productInCart = cartItem.find(
-		(item) => item.product?.id === product.data.id
-	);
+	const {productInCart} = useProductInCart(product.data)
 	const dispatch = useAppDispatch();
 	const notify = () => toast("Product added to cart");
-	// console.log("🚀 ~ file: [productslug].tsx:23 ~ cartItem:", cartItem);
-	// console.log(
-	// "🚀 ~ file: [productslug].tsx:25 ~ productInCart:",
-	// productInCart
-	// );
-		//add comment
+	
 	return (
 		<>
 			<Head>
