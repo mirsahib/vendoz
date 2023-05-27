@@ -16,10 +16,8 @@ const removeItem = (product:IProduct|null)=>{
     }
 }
 const increaseItem=(product:IProduct|null)=>{
-    console.log('increaseItem')
     return (dispatch:AppDispatch)=>{
         if(product!=null){
-            console.log('increase product')
             dispatch(increaseCart(product))
         }
 

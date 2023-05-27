@@ -86,7 +86,7 @@ export default function SingleProduct(
 											<FontAwesomeIcon icon={faMinus} />
 										</button>
 									</div>
-									<div>{productInCart?.count}</div>
+									<div>{productInCart && productInCart.count!=0?productInCart.count:0}</div>
 									<div className="ml-10">
 										<button
 											onClick={() =>

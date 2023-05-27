@@ -68,6 +68,7 @@ const cartSlice = createSlice({
                 state.itemList = [
                     { product: newItem, count: 1, productPrice: newItemprice }
                 ];
+                state.totalItem = productCount+1
             } else {
                 const productIndex = state.itemList.findIndex(
                     (item) => item.product?.id == newItem.id
@@ -88,7 +89,7 @@ const cartSlice = createSlice({
                 }
             }
             state.totalPrice = state.totalPrice + newItemprice;
-            console.log('increase',current(state))
+            console.log("🚀 ~ file: cart.ts:93 ~ increaseCart ~ state:", current(state))
         },
         decreaseCart(state, action: PayloadAction<IProduct>) {
             const newItem = action.payload;
