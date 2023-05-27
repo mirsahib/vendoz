@@ -38,7 +38,7 @@ export default function SingleProduct(
 	// "🚀 ~ file: [productslug].tsx:25 ~ productInCart:",
 	// productInCart
 	// );
-
+		//add comment
 	return (
 		<>
 			<Head>
