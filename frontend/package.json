@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:prod":"env-cmd -f .env.production yarn run build && yarn start",
     "start": "next start",
     "lint": "next lint"
   },
