@@ -3,10 +3,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images:{
-    domains:['localhost']
+    domains:['vendoz-production.up.railway.app']
   },
   env:{
-    REACT_API_BASE_URL: 'http://localhost:1337'
+    REACT_API_BASE_URL: 'https://vendoz-production.up.railway.app'
   }
 }
 
