@@ -2,6 +2,7 @@ import React from "react";
 import { useCardContext } from "../context/CardContext";
 import { useAppDispatch } from "@/store";
 import { addItem } from "../action/cartAction";
+import { toast } from "react-toastify";
 
 type Props = {
 	currency?: string
@@ -9,9 +10,11 @@ type Props = {
 
 export default function CardAction({currency="$"}: Props) {
 	const {product} = useCardContext()
+	const notify = ()=>toast('Product added to cart')
 	const dispatch = useAppDispatch()
 	const handleClick = ()=>{
 		dispatch(addItem(product))
+		notify()
 	}
 	return (
 		<div className="flex justify-between items-center mt-4">
