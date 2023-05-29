@@ -12,7 +12,7 @@ export default function CardImage() {
 	const {product} = useCardContext()
 	return (
 		<Link
-			href={"/"}
+			href={`catagory/${product.attributes.catagories?.data[0].attributes.title}/product/${product.id}`}
 			className="block relative h-48 rounded overflow-hidden"
 		>
 			<Image
