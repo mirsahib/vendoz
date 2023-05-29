@@ -1,31 +1,39 @@
-// import { product } from "@/mock/data";
-import Link from "next/link";
 import React from "react";
-import Card from "@/components/Card";
+import Card from "../components/Card";
 import { IProduct } from "@/lib/types";
-
-interface IProductList{
+interface IProductList {
 	products: IProduct[];
 }
 
-export default function Product({products}:IProductList) {
+export default function Product({ products }: IProductList) {
 	return (
-		<section className="flex flex-col item-center justify-center w-[90%] m-auto my-8">
-			<div className="flex flex-col items-center justify-center my-5">
-				<h1 className="text-2xl">Best Seller</h1>
-				<p className="text-lg">Top products</p>
+		<section className="text-gray-700 body-font">
+			<div className="w-[90%] px-5 py-24 mx-auto">
+				<div className="flex flex-col items-center mb-10">
+					<h3 className="text-2xl">Best Seller</h3>
+					<p>Top Product</p>
+				</div>
+				<div className="flex flex-wrap ">
+					{products.map((item) => (
+						<div
+							key={item.id}
+							className="lg:w-1/4 md:w-1/2 sm:w-1/2  w-full"
+						>
+							<Card
+								product={item}
+								image={<Card.Image />}
+								info={
+									<Card.Info>
+										<Card.Tag />
+										<Card.Title />
+									</Card.Info>
+								}
+								action={<Card.Action />}
+							/>
+						</div>
+					))}
+				</div>
 			</div>
-			<ul className="flex flex-wrap">
-				{products.map((item) => {
-					return (
-						<li key={item.id} className="flex flex-col lg:basis-1/4 sm:basis-1/2">
-							<Link href={`catagory/${item.attributes.catagories?.data[0].attributes.title}/product/${item.id}`}>
-								<Card props={item}/>
-							</Link>
-						</li>
-					);
-				})}
-			</ul>
 		</section>
 	);
 }
