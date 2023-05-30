@@ -1,5 +1,5 @@
 import EmptySection from "./components/EmptySection";
-import ViewCartItem from "./components/ViewCartItem";
+import ViewCartItem from "./components/CartItem";
 import Products from "./container/Products";
 import ViewCart from "./container/ViewCart";
 
