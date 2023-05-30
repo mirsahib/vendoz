@@ -1,5 +1,5 @@
 import React from "react";
-import { useCardContext } from "../context/CardContext";
+import { useCardContext } from "../../context/CardContext";
 import { truncate } from "@/util/truncate";
 
 export default function CardTitle() {

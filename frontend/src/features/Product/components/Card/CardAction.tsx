@@ -1,7 +1,7 @@
 import React from "react";
-import { useCardContext } from "../context/CardContext";
+import { useCardContext } from "../../context/CardContext";
 import { useAppDispatch } from "@/store";
-import { addItem } from "../action/cartAction";
+import { addItem } from "../../action/cartAction";
 import { toast } from "react-toastify";
 
 type Props = {

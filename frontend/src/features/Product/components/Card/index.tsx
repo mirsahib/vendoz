@@ -1,6 +1,6 @@
 import { IProduct } from "@/lib/types";
 import React, { ReactNode } from "react";
-import CardContext from "../context/CardContext";
+import CardContext from "../../context/CardContext";
 import CardImage from "./CardImage";
 import CardInfo from "./CardInfo";
 import CardTag from "./CardTag";

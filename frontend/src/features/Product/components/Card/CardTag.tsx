@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useCardContext } from "../context/CardContext";
+import { useCardContext } from "../../context/CardContext";
 
 type Props = {
 	children: string|null
