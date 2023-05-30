@@ -3,14 +3,17 @@ import Link from "next/link";
 import React from "react";
 import { useCardContext } from "../../context/CardContext";
 import { urlBuilder } from "@/util/UrlBuilder";
+import { useRouter } from "next/router";
+import useRelativePath from "../../hooks/useRelativePath";
 
 
 
 export default function CardImage() {
 	const {product} = useCardContext()
+	const {url} = useRelativePath(product)
 	return (
 		<Link
-			href={`catagory/${product.attributes.catagories?.data[0].attributes.title}/product/${product.id}`}
+			href={url}
 			className="block relative h-48 rounded overflow-hidden"
 		>
 			<Image
