@@ -2,8 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { InferGetStaticPropsType } from "next";
 import { getStaticProps } from "@/lib/Product/ReadById";
-import Product from "@/features/Product";
-import SingleProd from "@/features/Product/container/SingleProd";
+import {SingleProd} from "@/features/Product";
 import { IProduct } from "@/lib/types";
 import { useAppDispatch } from "@/store";
 import { addToCart } from "@/store/cart";
@@ -24,7 +23,7 @@ export default function SingleProduct(
 				<title>Vendoz Online Shop</title>
 			</Head>
 			<main>
-				<Product.Container.SingleProductSection
+				<SingleProd
 					product={product.data}
 					image={<SingleProd.Image />}
 					brand={<SingleProd.Brand />}
