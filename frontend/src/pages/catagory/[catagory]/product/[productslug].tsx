@@ -2,7 +2,6 @@ import Head from "next/head";
 import React from "react";
 import { InferGetStaticPropsType } from "next";
 import { getStaticProps } from "@/lib/Product/ReadById";
-import { useRouter } from "next/router";
 import Product from "@/features/Product";
 import SingleProd from "@/features/Product/container/SingleProd";
 import { IProduct } from "@/lib/types";
