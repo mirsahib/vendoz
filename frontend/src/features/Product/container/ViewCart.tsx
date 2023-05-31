@@ -31,8 +31,9 @@ export default function ViewCart() {
 					<h1 className="font-semibold text-2xl">Shopping Cart</h1>
 					<p>{cart.totalItem} items in cart</p>
 				</div>
-				{cart.itemList.map((product) => (
+				{cart.itemList.map((product,index) => (
 					<CartItem
+						key={index}
 						item={product}
 						image={<CartItem.Image />}
 						title={<CartItem.Title />}
