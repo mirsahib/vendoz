@@ -2,11 +2,21 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBasket, faUser,faBars,faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector } from "@/store";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/context/AuthContext";
 
 function Header() {
 	const totalItems = useAppSelector((state) => state.cartStore.totalItem);
 	const [open,setOpen] = useState(false)
+	const {user} = useContext(AuthContext)
+	const url = ()=>{
+		let url = "/user/signin"
+		if(user){
+			url = "/user/me"
+		}
+		return url
+	}
+	
 	return (
 		<header className="sticky text-gray-600 bg-white body-font border-b-2 border-gray-300">
 			<div className="container md:w-[92%] mx-auto flex flex-wrap p-3  md:p-1 flex-col md:flex-row  justify-between">
@@ -35,7 +45,7 @@ function Header() {
 						)}
 					</Link>
 					<Link
-						href={"/user/signin"}
+						href={url()}
 						className=" mb-5 md:mb-0 hover:text-blue-600"
 					>
 						<FontAwesomeIcon icon={faUser}  className="mr-1"/>
