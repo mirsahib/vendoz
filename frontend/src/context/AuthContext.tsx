@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { AuthSuccessResponse } from "@/lib/types";
+import { useRouter } from "next/router";
 
 type IUser = AuthSuccessResponse['user']
 interface AuthContextInterface {
@@ -19,7 +20,7 @@ export const AuthContext = createContext<AuthContextInterface>(
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const [user,setUser] = useState<boolean>(false)
-
+    const router = useRouter()
     useEffect(()=>{
         const record = sessionStorage.getItem('user')
         if(record !=null){
@@ -30,10 +31,12 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const saveUser = (user:IUser)=>{
         setUser(true)
         sessionStorage.setItem('user', JSON.stringify(user))
+        console.log("🚀 ~ file: AuthContext.tsx:34 ~ saveUser ~ user:", user)
     }
     const deleteUser = ()=>{
         setUser(false)
         sessionStorage.setItem('user', "")
+        router.push("/")
     }
 
 	return (
