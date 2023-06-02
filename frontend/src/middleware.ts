@@ -5,19 +5,24 @@ import { jwtVerify } from "jose";
 export async function middleware(request: NextRequest) {
 	try {
 		const cookie = request.cookies.get("jwt");
+		// console.log("🚀 ~ file: middleware.ts:8 ~ middleware ~ cookie:", cookie)
+		if(!cookie){
+			return NextResponse.redirect(new URL("/user/signin",request.url));
+		}
 		const secretKey = new TextEncoder().encode(
 			process.env.REACT_JWT_SECRET
 		);
 		const {payload,protectedHeader} = await jwtVerify(cookie?.value ?? "", secretKey);
-        // console.log("🚀 ~ file: middleware.ts:19 ~ middleware ~ request:", request.url)
-        // console.log("🚀 ~ file: middleware.ts:19 ~ middleware ~ request:", request.headers.get('Host'))
+        // console.log("🚀 ~ file: middleware.ts:12 ~ middleware ~ payload:", payload)
+		// // console.log("🚀 ~ file: middleware.ts:19 ~ middleware ~ request:", request.url)
+        // // console.log("🚀 ~ file: middleware.ts:19 ~ middleware ~ request:", request.headers.get('Host'))
         if(!payload.id){
             return NextResponse.redirect(new URL("/",request.url));
         }else{
             return NextResponse.rewrite(new URL(request.nextUrl.pathname,request.url));
         }
     } catch (error) {
-		console.log("🚀 ~ file: middleware.ts:15 ~ middleware ~ error:", error);
+		// console.log("🚀 ~ file: middleware.ts:15 ~ middleware ~ error:", error);
 	}
 }
 
