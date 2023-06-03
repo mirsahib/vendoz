@@ -1,5 +1,4 @@
 import { ParsedUrlQuery } from "querystring";
-import { IProduct } from "./Product";
 interface IParams extends ParsedUrlQuery {
 	productslug: string;
 	catagory: string;
@@ -13,8 +12,8 @@ interface IAuthPayload {
 	lastName?: string;
 }
 
-interface ApiSuccessResponse {
-	data: IProduct[];
+interface ApiSuccessResponse <T>{
+	data: T ;
 	meta: {
 		pagination: {
 			page: number;
@@ -50,12 +49,11 @@ interface AuthSuccessResponse {
 }
 
 type AuthApiResponse = AuthSuccessResponse | ApiErrorResponse;
-type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
+// type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;
 
 export type {
 	ApiSuccessResponse,
 	ApiErrorResponse,
-	ApiResponse,
 	AuthSuccessResponse,
 	AuthApiResponse,
 	IParams,
