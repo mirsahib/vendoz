@@ -8,14 +8,9 @@ import { AuthContext } from "@/context/AuthContext";
 function Header() {
 	const totalItems = useAppSelector((state) => state.cartStore.totalItem);
 	const [open,setOpen] = useState(false)
-	const {user} = useContext(AuthContext)
-	const url = ()=>{
-		let url = "/user/signin"
-		if(user){
-			url = "/user/me"
-		}
-		return url
-	}
+	const {url} = useContext(AuthContext)
+	// console.log("🚀 ~ file: Header.tsx:12 ~ Header ~ url:", url)
+	
 	
 	return (
 		<header className="sticky text-gray-600 bg-white body-font border-b-2 border-gray-300">
@@ -45,7 +40,7 @@ function Header() {
 						)}
 					</Link>
 					<Link
-						href={url()}
+						href={url}
 						className=" mb-5 md:mb-0 hover:text-blue-600"
 					>
 						<FontAwesomeIcon icon={faUser}  className="mr-1"/>

@@ -1,20 +1,17 @@
 import { AuthContext } from "@/context/AuthContext";
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import FormInput from "../components/FormInput";
-import { useRouter } from "next/router";
+import { ProfileApiResponse } from "@/lib/types";
 
-export default function Profile() {
+type props = {
+	profile: ProfileApiResponse
+}
+
+export default function Profile({profile}:props) {
+	// console.log("🚀 ~ file: Profile.tsx:12 ~ Profile ~ profile:", profile)
 	const { deleteUser } = useContext(AuthContext);
-	const router = useRouter()
-	const logout = async()=>{
-		const res = await fetch("/api/signout")
-		const data = await res.json()
-		router.push("/")
-		console.log("🚀 ~ file: Profile.tsx:12 ~ logout ~ res:", data)
-		
-	}
-
+	
 	return (
 		<section className="flex py-8">
 			<div className="w-[95%] lg:w-[90%] sm:w-[90%] text-gray-800 flex flex-col lg:flex-row justify-evenly m-auto">
@@ -29,33 +26,33 @@ export default function Profile() {
 					</div>
 					<h1 className="font-semibold text-lg">Joe Doe</h1>
 					<p className="text-gray-500 text-sm mb-5">
-						joedoe@mail.com
+						{profile?.email}
 					</p>
-					<button onClick={()=>logout()} className="flex text-sm text-gray-700  border border-blue-600 py-2 px-6 focus:outline-none hover:bg-red-600 hover:border-0 hover:text-white rounded">
+					<button onClick={()=>deleteUser()} className="flex text-sm text-gray-700  border border-blue-600 py-2 px-6 focus:outline-none hover:bg-red-600 hover:border-0 hover:text-white rounded">
 						Logout
 					</button>
 				</div>
 				<div className="w-full flex flex-col lg:border-r  items-center lg:items-baseline lg:w-2/5 p-3">
 					<h1 className="font-medium text-lg mb-5">Account</h1>
 					<FormInput
-						id="email"
+						id="fname"
 						label={
 							<label className="text-xs mb-1">First Name</label>
 						}
 						containerclassname="w-[80%] flex flex-col mb-5"
-						type="email"
+						type="text"
 						inputclassname="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 						autoComplete="on"
 						placeholder="Mir Sahib"
 						// {...register("email", { required: true })}
 					/>
 					<FormInput
-						id="email"
+						id="lname"
 						label={
 							<label className="text-xs mb-1">Last Name</label>
 						}
 						containerclassname="w-[80%] flex flex-col mb-5"
-						type="email"
+						type="text"
 						inputclassname="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 						autoComplete="on"
 						// {...register("email", { required: true })}
@@ -70,10 +67,10 @@ export default function Profile() {
 						// {...register("email", { required: true })}
 					/>
 					<FormInput
-						id="email"
+						id="address"
 						label={<label className="text-xs mb-1">Address</label>}
 						containerclassname="w-[80%] flex flex-col mb-5"
-						type="email"
+						type="text"
 						inputclassname=" h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
 						autoComplete="on"
 						placeholder="9161 Wallisville Rd,Houston,Texas,USA"

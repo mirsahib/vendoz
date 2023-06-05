@@ -49,6 +49,7 @@ interface AuthSuccessResponse {
 }
 
 type AuthApiResponse = AuthSuccessResponse | ApiErrorResponse;
+type ProfileApiResponse = AuthSuccessResponse["user"]
 // type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;
 
 export type {
@@ -58,4 +59,5 @@ export type {
 	AuthApiResponse,
 	IParams,
 	IAuthPayload,
+	ProfileApiResponse
 };

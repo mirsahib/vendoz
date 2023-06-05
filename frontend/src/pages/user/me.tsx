@@ -7,14 +7,14 @@ import React from "react";
 export default function Me({
 	data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	console.log("🚀 ~ file: me.tsx:8 ~ Me ~ data:", data);
+	// console.log("🚀 ~ file: me.tsx:8 ~ Me ~ data:", data);
 
 	return (
 		<>
 			<Head>
 				<title>Profile | Vendoz Online Shopping</title>
 			</Head>
-			<main>{<Profile />}</main>
+			<main>{<Profile profile={data}/>}</main>
 		</>
 	);
 }
