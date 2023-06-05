@@ -44,7 +44,7 @@ function Register({
 	const userName = uuid4();
 	
 	return (
-		<section className="flex justify-center items-center py-8">
+		<section className="flex text-gray-800 justify-center items-center py-8">
 			<div className="flex flex-col items-center w-[24em] lg:w-[30em] sm:w-[22em]">
 				<div className="w-[90%] lg:w-[67%] flex flex-row items-center justify-between mb-5">
 					<h1 className="text-2xl">Create an account</h1>

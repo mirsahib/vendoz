@@ -38,7 +38,7 @@ function Login({
 	// console.log("🚀 ~ file: Login.tsx:37 ~ formState:", formState);
 
 	return (
-		<section className="flex justify-center items-center py-8">
+		<section className="flex justify-center items-center text-gray-800 py-8">
 			<div className="flex flex-col items-center w-[24em] lg:w-[30em] sm:w-[22em]">
 				<div className="w-[90%] lg:w-[67%] flex flex-row items-center justify-between mb-5">
 					<h1 className="text-2xl">Login</h1>
