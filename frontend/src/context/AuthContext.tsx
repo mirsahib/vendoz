@@ -35,15 +35,15 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
         setUser(true)
         setUrl('/user/me')
         sessionStorage.setItem('user', JSON.stringify(user))
-        // console.log("🚀 ~ file: AuthContext.tsx:34 ~ saveUser ~ user:", user)
+        console.log("🚀 ~ file: AuthContext.tsx:34 ~ saveUser ~ user:", user)
     }
     const deleteUser = async()=>{
         setUser(false)
         setUrl("/user/signin")
-        sessionStorage.setItem('user', "")
+        sessionStorage.removeItem("user")
         const res = await fetch("/api/signout")
 		const data = await res.json()
-        // console.log("🚀 ~ file: AuthContext.tsx:46 ~ deleteUser ~ data:", data)
+        console.log("🚀 ~ file: AuthContext.tsx:46 ~ deleteUser ~ data:", data)
         router.push("/")
     }
     

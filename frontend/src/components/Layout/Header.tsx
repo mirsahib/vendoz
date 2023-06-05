@@ -14,8 +14,8 @@ function Header() {
     const totalItems = useAppSelector((state) => state.cartStore.totalItem);
     const [open, setOpen] = useState(false);
     const { url, user } = useContext(AuthContext);
-    // console.log("🚀 ~ file: Header.tsx:17 ~ Header ~ user:", user)
-    // // console.log("🚀 ~ file: Header.tsx:12 ~ Header ~ url:", url)
+     console.log("🚀 ~ file: Header.tsx:17 ~ Header ~ user:", user)
+     console.log("🚀 ~ file: Header.tsx:12 ~ Header ~ url:", url)
 
     return (
         <header className="sticky text-gray-600 bg-white body-font border-b-2 border-gray-300">
