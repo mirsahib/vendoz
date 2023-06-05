@@ -1,35 +1,31 @@
-import React, { PropsWithoutRef, forwardRef } from "react";
+import React, { PropsWithoutRef, ReactNode, forwardRef } from "react";
 
 interface IFormInput extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
-  labelname: string;
-  label: string;
-  labelclassname: string;
-  containerclassname:string;
-  type:"text"|"email"|"password"|"hidden",
-  inputclassname:string
+	label?: ReactNode;
+	containerclassname: string;
+	type: "text" | "email" | "password" | "hidden";
+	inputclassname: string;
 }
 
 const FormInput = forwardRef<HTMLInputElement, IFormInput>(
 	({ children, ...props }, ref) => {
-    const {labelname,label,labelclassname,containerclassname,type,inputclassname}=props
+		const { label, containerclassname, type, inputclassname } = props;
 		return (
 			<div className={containerclassname}>
-				<label htmlFor={labelname} className={labelclassname}>
-					{label}
-				</label>
+				{label}
 				<input
-          {...props}
+					{...props}
 					ref={ref}
-          type={type}
-          className={inputclassname}
+					type={type}
+					className={inputclassname}
 				/>
 			</div>
 		);
 	}
 );
-FormInput.displayName = "FormInput"
+FormInput.displayName = "FormInput";
 
-export default FormInput
+export default FormInput;
 
 // const InputField = forwardRef<HTMLInputElement, InputGroupProps>(
 // 	({ children, ...props }, ref) => {

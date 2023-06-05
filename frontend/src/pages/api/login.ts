@@ -16,11 +16,18 @@ export default async function handler(req: ApiRequest, res: NextApiResponse) {
 	const { email, password } = req.body;
 	try {
 		const payload: IAuthPayload = { identifier: email, password: password };
+		const options: RequestInit = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(payload)
+		};
 		const data = await makeApiCall<
 			AuthSuccessResponse,
 			ApiErrorResponse,
 			IAuthPayload
-		>("/auth/local", "POST", payload);
+		>("/auth/local",options);
 
 		if ("jwt" in data && data["jwt"]) {
 			setCookie({ res }, "jwt", data?.jwt, {

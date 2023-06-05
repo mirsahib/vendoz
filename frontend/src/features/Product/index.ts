@@ -1,21 +1,7 @@
-import EmptySection from "./components/EmptySection";
-import ViewCartItem from "./components/ViewCartItem";
-import Products from "./container/Products";
-import ViewCart from "./container/ViewCart";
+export {default as EmptySection}  from "./components/EmptySection";
+export {default as ViewCartItem}  from "./components/CartItem";
+export {default as ProductSection}  from "./container/ProductSection";
+export {default as ViewCart}  from "./container/ViewCart";
+export {default as SingleProd}  from "./container/SingleProd";
+export {default as CatagorySection}  from "./container/CatagorySection";
 
-const Container = {
-    ProductSection: Products,
-    ViewCartSection: ViewCart
-}
-
-const Component = {
-    ViewCartItem:ViewCartItem,
-    EmptySection:EmptySection
-}
-
-const Product ={
-    Container,
-    Component
-}
-
-export default Product

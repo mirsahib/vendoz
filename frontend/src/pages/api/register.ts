@@ -15,12 +15,18 @@ interface ApiRequest extends NextApiRequest {
 export default async function handler(req: ApiRequest, res: NextApiResponse) {
 	try {
 		const payload: IAuthPayload = req.body;
-
+		const options: RequestInit = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(payload)
+		};
 		let data = await makeApiCall<
 			AuthSuccessResponse,
 			ApiErrorResponse,
 			IAuthPayload
-		>("/auth/local/register", "POST", payload);
+		>("/auth/local/register", options);
 
 		if ("jwt" in data && data["jwt"]) {
 			setCookie({ res }, "jwt", data?.jwt, {

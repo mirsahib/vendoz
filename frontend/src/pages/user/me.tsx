@@ -1,27 +1,22 @@
-import { AuthContext } from "@/context/AuthContext";
-import User from "@/features/User";
+import { Profile } from "@/features/User";
+import { getServerSideProps } from "@/lib/User/Read";
+import { InferGetServerSidePropsType } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React from "react";
 
-export default function Me() {
-	const { user } = useContext(AuthContext);
-	const router = useRouter();
-	useEffect(() => {
-		console.log("🚀 ~ file: Profile.tsx:10 ~ useEffect ~ user:", user);
-		if (!user) {
-			router.push("/");
-		}
-	}, [router,user]);
-	
+export default function Me({
+	data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+	// console.log("🚀 ~ file: me.tsx:8 ~ Me ~ data:", data);
+
 	return (
 		<>
 			<Head>
 				<title>Profile | Vendoz Online Shopping</title>
 			</Head>
-			<main>
-				{user?<User.Container.Profile />:<User.Component.LoadingComponent/>}
-			</main>
+			<main>{<Profile profile={data}/>}</main>
 		</>
 	);
 }
+
+export {getServerSideProps} from "@/lib/User/Read"

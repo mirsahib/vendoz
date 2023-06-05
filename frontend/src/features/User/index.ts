@@ -1,21 +1,4 @@
-import Loading from "./components/Loading";
-import Login from "./container/Login";
-import Profile from "./container/Profile";
-import Register from "./container/Register";
-
-const Container = {
-    Profile: Profile,
-    LoginContainer: Login,
-    RegisterContainer: Register
-}
-
-const Component = {
-    LoadingComponent:Loading
-}
-
-const User = {
-    Container: Container,
-    Component: Component
-}
-
-export default User
+export { default as Loading } from "./components/Loading";
+export { default as Login } from "./container/Login";
+export { default as Profile } from "./container/Profile";
+export { default as Register } from "./container/Register";

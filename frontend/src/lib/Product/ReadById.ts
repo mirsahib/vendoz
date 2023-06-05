@@ -1,25 +1,16 @@
-import {
-	GetStaticPropsContext,
-	GetStaticPropsResult,
-} from "next";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import {
 	ApiErrorResponse,
-	ApiResponse,
 	ApiSuccessResponse,
 	IParams,
-	IProduct
+	IProduct,
 } from "../types";
 import makeApiCall from "@/util/makeApiCall";
 
-type ApiSuccessResponseByID = {
-	data:IProduct,
-	meta:ApiSuccessResponse['meta']
-}
 
 const getStaticPaths = async () => {
-	const products = await makeApiCall<ApiSuccessResponse, ApiErrorResponse>(
+	const products = await makeApiCall<ApiSuccessResponse<IProduct[]>, ApiErrorResponse>(
 		"/products?populate=*",
-		"GET"
 	);
 	let paths: any;
 
@@ -46,13 +37,13 @@ const getStaticPaths = async () => {
 
 async function getStaticProps(
 	ctx: GetStaticPropsContext<IParams>
-): Promise<GetStaticPropsResult<ApiSuccessResponseByID>> {
+): Promise<GetStaticPropsResult<ApiSuccessResponse<IProduct>>> {
 	const { productslug } = ctx.params as IParams;
 	try {
-		const product = await makeApiCall<ApiSuccessResponseByID, ApiErrorResponse>(
-			`/products/${productslug}?populate=*`,
-			"GET"
-		);
+		const product = await makeApiCall<
+			ApiSuccessResponse<IProduct>,
+			ApiErrorResponse
+		>(`/products/${productslug}?populate=*`);
 		if (product && "error" in product) {
 			return { notFound: true };
 		} else {

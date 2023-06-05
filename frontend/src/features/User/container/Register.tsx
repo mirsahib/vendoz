@@ -69,9 +69,7 @@ function Register({
 					>
 						<FormInput
 							id="email"
-							labelname="email"
-							label="Email"
-							labelclassname="text-xs mb-1"
+							label={<label className="text-xs mb-1">Email</label>}
 							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
 							type="email"
 							inputclassname="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
@@ -86,9 +84,7 @@ function Register({
 						/>
 						<FormInput
 							id="firstName"
-							labelname="firstName"
-							label="First Name"
-							labelclassname="text-xs mb-1"
+							label={<label className="text-xs mb-1">First Name</label>}
 							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
 							type="text"
 							inputclassname="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
@@ -96,9 +92,7 @@ function Register({
 						/>
 						<FormInput
 							id="lastName"
-							labelname="lastName"
-							label="Last Name"
-							labelclassname="text-xs mb-1"
+							label={<label className="text-xs mb-1">Last Name</label>}
 							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
 							type="text"
 							inputclassname="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
@@ -106,9 +100,7 @@ function Register({
 						/>
 						<FormInput
 							id="password"
-							labelname="password"
-							label="Password"
-							labelclassname="text-xs mb-1"
+							label={<label className="text-xs mb-1">Password</label>}
 							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
 							type="password"
 							inputclassname="h-14 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"

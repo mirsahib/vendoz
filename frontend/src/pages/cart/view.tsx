@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import { useAppSelector } from "@/store";
-import Product from "@/features/Product";
+import {EmptySection,ViewCart} from "@/features/Product";
 import {  faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
 export default function Cart() {
@@ -14,14 +14,14 @@ export default function Cart() {
 			<main>
 				<section className="flex py-8">
 					{cart.totalItem === 0 ? (
-						<Product.Component.EmptySection
+						<EmptySection
 							title="SHOPPING CART IS EMPTY"
 							icon={faShoppingBag}
 							tagline="You have no items in your shopping cart."
 							buttonTitles="CONTINUE SHOPPING"
 						/>
 					) : (
-						<Product.Container.ViewCartSection />
+						<ViewCart />
 					)}
 				</section>
 			</main>

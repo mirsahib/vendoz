@@ -1,26 +1,41 @@
 type HTTPMETHOD = "GET" | "POST";
 const makeApiCall = async <Success, Error, T = void>(
 	endpoint: string,
-	method: HTTPMETHOD,
-	payload?: T
+	options?:RequestInit,
+	baseurl?:string,
 ): Promise<Success | Error> => {
-	let options: RequestInit = {
-		method: method,
-		headers: {
-			Authorization: "Bearer " + process.env.REACT_API_TOKEN,
-		},
-	};
-
-	if (method === "POST" && payload) {
+	// console.log("🚀 ~ file: makeApiCall.ts:8 ~ endpoint:", endpoint)
+	let url = process.env.REACT_API_URL+endpoint
+	if(!options){
 		options = {
-			method:method,
+			method:"GET",
 			headers: {
-				"Content-Type": "application/json",
+				Authorization: "Bearer " + process.env.REACT_API_TOKEN,
 			},
-			body: JSON.stringify(payload),
 		};
 	}
-	const url = process.env.REACT_API_URL+endpoint
+	if(baseurl){
+		url = baseurl + endpoint
+	}	
+	console.log("🚀 ~ file: makeApiCall.ts:19 ~ url:", url)
+	// if(token){
+	// 	options.headers={
+	// 		Authorization: "Bearer " + token,	
+	// 	}
+	// }
+
+	// if (method === "POST" && payload) {
+	// 	options = {
+	// 		method:method,
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify(payload),
+	// 	};
+	// }
+	// console.log("🚀 ~ file: makeApiCall.ts:31 ~ url:", url)
+	// console.log("🚀 ~ file: makeApiCall.ts:31 ~ url:", process.env.REACT_API_URL)
+
 	const response = await fetch(url, options);
 	const data = await response.json();
 	if (response.ok) {

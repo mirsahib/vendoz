@@ -1,12 +1,16 @@
 import makeApiCall from "@/util/makeApiCall";
-import { ApiErrorResponse, ApiSuccessResponse } from "../types";
+import { ApiErrorResponse, ApiSuccessResponse, IProduct } from "../types";
 
 const getStaticProps = async () => {
 	try {
-		const products = await makeApiCall<ApiSuccessResponse,ApiErrorResponse>('/products?populate=*','GET');
-		if(products && 'error' in products) {
-			return {notFound: true}
-		}else{
+		
+		const products = await makeApiCall<
+			ApiSuccessResponse<IProduct[]>,
+			ApiErrorResponse
+		>("/products?populate=*");
+		if (products && "error" in products) {
+			return { notFound: true };
+		} else {
 			return {
 				props: {
 					products,
@@ -14,8 +18,8 @@ const getStaticProps = async () => {
 			};
 		}
 	} catch (error) {
-        return {notFound: true}
-    }
+		return { notFound: true };
+	}
 };
 
 export { getStaticProps };

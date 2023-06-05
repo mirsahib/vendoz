@@ -29,8 +29,6 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, action: PayloadAction<IProduct>) {
-            console.log("🚀 ~ file: cart.ts:32 ~ addToCart ~ state:", state)
-            
             const newItem = action.payload;
             const newItemprice = action.payload.attributes.price?action.payload.attributes.price:0
             const productCount = state.totalItem;

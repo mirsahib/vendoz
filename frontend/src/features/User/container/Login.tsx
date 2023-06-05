@@ -66,9 +66,7 @@ function Login({
 					>
 						<FormInput
 							id="email"
-							labelname="email"
-							label="Email"
-							labelclassname="text-xs mb-1"
+							label={<label className="text-xs mb-1">Email</label>}
 							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
 							type="email"
 							inputclassname="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"
@@ -78,9 +76,7 @@ function Login({
 						/>
 						<FormInput
 							id="password"
-							labelname="password"
-							label="Password"
-							labelclassname="text-xs mb-1"
+							label={<label className="text-xs mb-1">Password</label>}
 							containerclassname="w-72 lg:w-80 flex flex-col mb-5"
 							type="password"
 							inputclassname="h-10 border-2 border-gray-400 rounded focus:outline-blue-600 text-sm p-3"

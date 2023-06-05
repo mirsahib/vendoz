@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import Catagory from "@/components/Catagory";
 import { getStaticProps } from "@/lib/Product/ReadAll";
 import { InferGetStaticPropsType } from "next";
-import Product from "@/features/Product";
+import {ProductSection} from "@/features/Product";
 
 export default function Home({products}:InferGetStaticPropsType<typeof getStaticProps>) {
 
@@ -17,7 +17,7 @@ export default function Home({products}:InferGetStaticPropsType<typeof getStatic
 				{/* hero section */}
 				<Catagory/>
 				{/* catagory section */}
-				<Product.Container.ProductSection products={products?.data}/>
+				<ProductSection products={products?.data}/>
 				{/* <Product/>
 				<Product/> */}
 				{/* product section */}
