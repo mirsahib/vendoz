@@ -1,5 +1,13 @@
 
 /** @type {import('next').NextConfig} */
+const path = require('path')
+const dotenv = require('dotenv')
+
+dotenv.config({
+    path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV || 'local'}`),
+})
+
+
 const nextConfig = {
   reactStrictMode: true,
   images:{
