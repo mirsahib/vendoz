@@ -1,3 +1,8 @@
+import { generateSeedData } from "./_seed";
+import { ApiProductProduct } from "../schemas";
+import { faker } from "@faker-js/faker";
+type ProductType = ApiProductProduct["attributes"]
+
 export default {
   /**
    * An asynchronous register function that runs before
@@ -5,7 +10,7 @@ export default {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/*{ strapi }*/) {},
+  register(/*{ strapi }*/) { },
 
   /**
    * An asynchronous bootstrap function that runs before
@@ -14,5 +19,9 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/*{ strapi }*/) {},
+  async bootstrap({ strapi }: { strapi: Strapi.Strapi }) {
+    //await generateSeedData(strapi)
+    
+  },
 };
+ 
