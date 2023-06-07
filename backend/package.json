@@ -11,6 +11,7 @@
     "types":"t4s --out ../frontend/src/lib/types"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@oak-digital/types-4-strapi-2": "^0.5.5"
   },
   "dependencies": {
