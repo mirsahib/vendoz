@@ -1,0 +1,93 @@
+version: '3.8'
+services:
+  vendoz-server:
+    image: "vendoz_server"
+    container_name: "vendoz_server"
+    build: 
+      context: ./backend
+    restart: unless-stopped
+    env_file:
+      .env
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend/config:/backend/config
+      - ./backend/src:/backend/src
+      - ./backend/package.json:/backend/package.json
+      - ./backend/yarn.lock:/backend/yarn.lock
+      - ./backend/.env:/backend/.env
+    ports:
+      - "1337:1337" #{host_port:container_port}
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: postgres
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PORT: ${DATABASE_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      NODE_ENV: ${NODE_ENV}
+    networks:
+      vendoz_net:
+        ipv4_address: 172.30.0.2
+  
+  vendoz-client:
+    image: "vendoz_client"
+    container_name: "vendoz_client"
+    build: 
+      context: ./frontend
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - "8080:3000"
+    networks:
+      vendoz_net:
+        ipv4_address: 172.30.0.3
+
+
+  postgres:
+    image: postgres:14.1-alpine
+    container_name: "postgres"
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      ./backend/.env
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      vendoz_net:
+        ipv4_address: 172.30.0.4
+  
+  pg-admin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "mirsahib24@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "mirsahib123"
+    ports:
+      - 4000:80
+    depends_on:
+      - postgres
+    networks:
+      vendoz_net:
+        ipv4_address: 172.30.0.5
+
+networks:
+  vendoz_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/16
+          gateway: 172.30.0.1
+volumes:
+  postgres:
+
+    
+
+    
