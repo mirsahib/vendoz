@@ -1,0 +1,6 @@
+.tmp/
+.cache/
+.git/
+.next/
+node_modules/
+
