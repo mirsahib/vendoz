@@ -5,17 +5,36 @@ export const generateSeedData = async (strapi: Strapi.Strapi) => {
         desc: faker.commerce.productDescription(),
         imgUrl:faker.image.urlLoremFlickr({category:"food"}),
         price: faker.commerce.price(),
-        catagories: [1, 2],
-        sub_catagories: [5, 4],
+        catagories: [1],
+        sub_catagories: [1],
         type:"featured",
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
         publishedAt: new Date().getTime(),
     }
+    const sub_catagory = {
+        title:faker.commerce.productAdjective(),
+        publishedAt: new Date().getTime(),
+    }
+    const catagory = {
+        title:faker.commerce.department(),
+        desc:faker.commerce.productDescription(),
+        publishedAt: new Date().getTime(),
+    }
     try {
-        const entry = await strapi.entityService.create('api::product.product', {
+        
+        const cat = strapi.entityService.create('api::catagory.catagory',{
+            data:catagory
+        })
+        const sub_cat = strapi.entityService.create('api::sub-catagory.sub-catagory',{
+            data:sub_catagory
+        })
+        const prod = strapi.entityService.create('api::product.product', {
             data: product,
         });
+        const entry = Promise.all([cat,sub_cat,prod]).then(val=>console.log(val))
+        console.log("🚀 ~ file: index.ts:33 ~ generateSeedData ~ entry:", entry)
+
     } catch (error) {
         console.log("🚀 ~ file: index.ts:40 ~ bootstrap ~ error:", error)
     }
