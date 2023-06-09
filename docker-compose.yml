@@ -10,6 +10,7 @@ services:
       .env
     depends_on:
       - postgres
+      - pg-admin
     volumes:
       - ./backend/config:/backend/config
       - ./backend/src:/backend/src
@@ -28,6 +29,12 @@ services:
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       NODE_ENV: ${NODE_ENV}
+    healthcheck:
+      test: ["CMD", "curl","-f","http://localhost:1337"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     networks:
       vendoz_net:
         ipv4_address: 172.30.0.2
@@ -37,10 +44,14 @@ services:
     container_name: "vendoz_client"
     build: 
       context: ./frontend
+    depends_on:
+      vendoz-server:
+        condition: service_healthy
+    restart: on-failure
     volumes:
       - ./frontend:/frontend
     ports:
-      - "8080:3000"
+      - "3000:3000"
     networks:
       vendoz_net:
         ipv4_address: 172.30.0.3
