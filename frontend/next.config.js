@@ -10,11 +10,12 @@ dotenv.config({
 
 const nextConfig = {
   reactStrictMode: true,
+  output:"standalone",
   images:{
-    domains:['localhost']
+    domains:['172.30.0.1']
   },
   env:{
-    REACT_API_BASE_URL: 'http://localhost:1337'
+    REACT_API_BASE_URL: 'http://172.30.0.1:1337'
   }
 }
 
