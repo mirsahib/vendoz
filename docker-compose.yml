@@ -1,0 +1,106 @@
+version: "3"
+services:
+  vendoz-server:
+    container_name: "vendoz-server"
+    build:
+      context: ./backend
+    image: vendoz-server
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      NODE_ENV: ${NODE_ENV}
+    volumes:
+      - ./backend/config:/backend/app/config
+      - ./backend/src:/backend/app/src
+      - ./backend/package.json:/backend/package.json
+      - ./backend/yarn.lock:/backend/yarn.lock
+      - ./backend/.env:/backend/app/.env
+      - ./backend/public/uploads:/backend/app/public/uploads
+    ports:
+      - "1337:1337"
+    networks:
+      vendoz-net:
+        ipv4_address: 172.30.0.2
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: "postgres"
+    platform: linux/amd64 #for platform error on Apple M1 chips
+    restart: unless-stopped
+    env_file: .env
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - strapi-data:/var/lib/postgresql/data/ #using a volume
+      #- ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
+    ports:
+      - "5432:5432"
+    networks:
+      vendoz-net:
+        ipv4_address: 172.30.0.3
+  
+  pg-admin:
+    image: dpage/pgadmin4
+    container_name: pg-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "mirsahib24@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "mirsahib123"
+    ports:
+      - 4000:80
+    depends_on:
+      - postgres
+    networks:
+      vendoz-net:
+        ipv4_address: 172.30.0.4
+
+  vendoz-client:
+    container_name: "vendoz-client"
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    image: vendoz-client
+    restart: on-failure
+    env_file: .env
+    environment:
+      NODE_ENV: ${NODE_ENV}
+    volumes:
+      - ./frontend/:/frontend
+      - ./frontend/src:/frontend/src
+      - ./frontend/public:/frontend/public
+      - ./frontend/node_modules:/frontend/node_modules
+      - ./frontend/package.json:/frontend/package.json
+      - ./frontend/next.config.js:/frontend/next.config.js
+      - ./frontend/tsconfig.json:/frontend/tsconfig.json
+    ports:
+      - "3000:3000"
+    networks:
+      vendoz-net:
+        ipv4_address: 172.30.0.5
+    
+
+volumes:
+  strapi-data:
+
+networks:
+  vendoz-net:
+    name: Vendoz
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/16
+          gateway: 172.30.0.1
