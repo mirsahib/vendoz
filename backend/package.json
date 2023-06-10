@@ -8,7 +8,7 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "types":"t4s --out ../frontend/src/lib/types"
+    "types": "t4s --out ../frontend/src/lib/types"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
@@ -19,6 +19,7 @@
     "@strapi/plugin-users-permissions": "4.10.2",
     "@strapi/strapi": "4.10.2",
     "better-sqlite3": "8.0.1",
+    "pg": "^8.11.0",
     "typescript": "^5.0.4"
   },
   "author": {
